@@ -8,11 +8,11 @@
         <div class="row">
             <div class="ibox">
                 <div class="ibox-title">
-                    <span class="pull-right">
+                    <div class="pull-right">
                         <button type="button" id="addItemModalBtn" class="btn btn-primary">
                             <i class="fa fa-plus"></i> เพิ่มครุภัณฑ์
                         </button>
-                    </span>
+                    </div>
                     <h3>รายการครุภัณฑ์</h3>
                 </div>
                 <div class="ibox-content">

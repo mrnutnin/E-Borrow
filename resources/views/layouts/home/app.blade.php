@@ -19,7 +19,7 @@
     <link href="/css/plugins/dataTables/datatables.min.css" rel="stylesheet">
     <link href="/css/plugins/dataTables/responsive.dataTables.min.css" rel="stylesheet">
 
-    {{-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/dt-1.10.21/r-2.2.5/datatables.min.css"/> --}}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/dt-1.10.21/r-2.2.5/datatables.min.css"/>
 
 
 </head>
@@ -58,7 +58,6 @@
 <script src="/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
 <!-- Custom and plugin javascript -->
-<script src="/js/inspinia.js"></script>
 <script src="/js/plugins/pace/pace.min.js"></script>
 
 <!-- jQuery UI -->

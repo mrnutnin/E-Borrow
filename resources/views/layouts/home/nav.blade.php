@@ -6,13 +6,13 @@
                     <span>
                         <img alt="image" style=" width: 30%; height: auto;" class="img-circle" src="/img/avatar.png" />
                     </span>
-                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                    <span data-toggle="dropdown" class="dropdown-toggle" href="#">
                         <span class="clear">
                             <span class="block m-t-xs">
                                 <strong class="font-bold">{{ Auth::user()->name }}</strong>
-                            </span> <span class="text-muted text-xs block">  <b class="caret"></b></span>
+                            </span>
                         </span>
-                    </a>
+                    </span>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
                         <li>
                             <a href="{{ route('logout') }}"

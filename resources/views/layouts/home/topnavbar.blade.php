@@ -1,15 +1,10 @@
 <div class="row border-bottom">
-    <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
+    {{-- <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
             <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
-            {{-- <form role="search" class="navbar-form-custom" method="post" action="/">
-                <div class="form-group">
-                    <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search" />
-                </div>
-            </form> --}}
         </div>
-        {{-- <ul class="nav navbar-top-links navbar-right">
-            <li> --}}
+        <ul class="nav navbar-top-links navbar-right">
+            <li>
                 <ul class="nav navbar-nav ml-auto navbar-top-links navbar-right">
                     <!-- Authentication Links -->
                     @guest
@@ -41,7 +36,24 @@
                         </li>
                     @endguest
                 </ul>
-            {{-- </li>
-        </ul> --}}
+            </li>
+        </ul>
+    </nav> --}}
+    <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+        </div>
+        <ul class="nav navbar-top-links navbar-right">
+        
+            <li>
+                <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <i class="fa fa-sign-out"></i> Log out
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+            </li>
+        </ul>
+
     </nav>
 </div>
