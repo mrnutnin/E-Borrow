@@ -20,6 +20,10 @@
     <link href="/css/plugins/dataTables/responsive.dataTables.min.css" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/dt-1.10.21/r-2.2.5/datatables.min.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.28.0/moment.min.js">
+
 
 
 </head>
@@ -38,7 +42,29 @@
             @include('layouts.home.topnavbar')
 
             <!-- Main view  -->
-            @yield('content')
+            {{-- @yield('content') --}}
+            <div class="wrapper wrapper-content">
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+                @if (session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+                @endif
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                @yield('content')
+            </div>
 
             <!-- Footer -->
             @include('layouts.home.footer')
@@ -70,9 +96,12 @@
 <script type="text/javascript" src="/js/plugins/dataTables/dataTables.responsive.min.js"></script>
 
 {{-- <script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.10.21/r-2.2.5/datatables.min.js"></script> --}}
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
 @section('script')
+
+
 
 
 @show

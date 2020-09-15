@@ -1,0 +1,152 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Type;
+use App\Material;
+use App\Unit;
+use App\ReceiptMaterial;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use App\BorrowMaterial;
+use Carbon\Carbon;
+
+class MaterialAdminController extends Controller
+{
+    //
+    public function index()
+    {
+        $types = Type::all();
+        $units = Unit::all();
+        return view('admin.materials.index', compact('types','units'));
+    }
+
+    public function showMaterials()
+    {
+        return datatables()->of(
+            Material::query()->with('unit', 'type')->orderBy('updated_at', 'desc')
+        )->toJson();
+    }
+
+    public function storeMaterial(Request $req){
+        //dd($req->all());
+
+        DB::beginTransaction();
+
+        if($req->id){
+            $material = Material::find($req->id);
+        }else{
+            $material = new Material;
+        }
+        // $material->bill_no = $req->bill_no;
+        $material->name = $req->name;
+        $material->price_unit = $req->price_unit;
+        $material->amount = $req->amount;
+        // $material->total_price = $req->total_price;
+        $material->unit_id = $req->unit;
+        $material->type_id = $req->type;
+        $material->save();
+
+        DB::commit();
+        return redirect('manage-materials')->with('success', 'บันทึกข้อมูลสำเร็จ!');
+    }
+
+    public function deleteMaterial(Request $req){
+        //dd($req->all());
+        DB::beginTransaction();
+        $material = Material::find($req->id);
+        if($material->delete()){
+            $data = [
+                'title' => 'ลบสำเร็จ',
+                'msg' => 'ลบรายการสำเร็จ',
+                'status' => 'success',
+            ];
+        }else{
+            $data = [
+                'title' => 'เกิดข้อผิดพลาด',
+                'msg' => 'ลบรายการไม่สำเร็จ',
+                'status' => 'error',
+            ];
+        }
+        DB::commit();
+
+        return $data;
+    }
+
+    public function addAmount(Request $req){
+
+        DB::beginTransaction();
+        $material = Material::find($req->id);
+        $material->amount += $req->amount;
+
+        $receiptMaterial = new ReceiptMaterial;
+        $receiptMaterial->material_id =  $req->id;
+        $receiptMaterial->amount = $req->amount;
+
+        if($material->save() && $receiptMaterial->save()){
+            $data = [
+                'title' => 'บันทึกสำเร็จ',
+                'msg' => 'เพิ่มจำนวนวัสดุสำเร็จ',
+                'status' => 'success',
+            ];
+        }else{
+            $data = [
+                'title' => 'เกิดข้อผิดพลาด',
+                'msg' => 'เพิ่มจำนวนวัสดุไม่สำเร็จ',
+                'status' => 'error',
+            ];
+        }
+        DB::commit();
+
+        return $data;
+    }
+
+
+    public function history()
+    {
+        return view('admin.materials.history');
+    }
+
+    public function showHistory(){
+
+        return datatables()->of(
+            BorrowMaterial::query()->with('material.type','material.unit', 'user')->orderBy('updated_at', 'desc')
+        )->toJson();
+
+    }
+
+
+    public function approve()
+    {
+        return view('admin.materials.approve');
+    }
+
+    public function approveBorrow(Request $req)
+    {
+        $id = $req->id;
+        $status = $req->status;
+
+        // dd($status);
+        $borrowMaterial = BorrowMaterial::find($id);
+        $borrowMaterial->status = $status;
+        $borrowMaterial->approve_date = Carbon::now();
+        $borrowMaterial->save();
+
+        if($status == 2){
+            $material = Material::find($borrowMaterial->material_id);
+            $material->amount += $borrowMaterial->amount;
+            $material->save();
+        }
+        $data = [
+            'title' => 'อนุมัติแล้ว',
+            'msg' => 'อนุมัติแล้วรายการยืมนี้แล้ว',
+            'status' => 'success',
+        ];
+        return $data;
+    }
+
+
+
+}
