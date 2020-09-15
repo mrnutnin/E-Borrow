@@ -18,7 +18,7 @@ class GoodAdminController extends Controller
         $units = Unit::all();
         $goods = Good::with('unit', 'department')->get();
         //dd($goods);
-        return view('goods.index', compact('goods', 'units', 'departments'));
+        return view('admin.goods.index', compact('goods', 'units', 'departments'));
     }
 
     public function showGood()
