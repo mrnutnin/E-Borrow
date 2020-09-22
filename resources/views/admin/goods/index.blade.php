@@ -31,6 +31,7 @@
                                 {{-- <th>ราคาต่อหน่วย</th> --}}
                                 {{-- <th>ราคารวม</th> --}}
                                 <th>สถานะ</th>
+                                <th>แก้ไขล่าสุดเมื่อ</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -224,7 +225,7 @@ $("#item_list_table").ready(function () {
         },
         'columnDefs': [
             {
-                "targets": [0, 1, 2, 3, 4,5,6,7,8],
+                "targets": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
                 "className": "text-center",
             },
         ],
@@ -275,8 +276,15 @@ $("#item_list_table").ready(function () {
             },
             {
                 "render": function (data, type, full) {
+                    return moment(full.updated_at).format('DD/MM/YYYY');
+                }
+            },
+
+            {
+                "render": function (data, type, full) {
                     var obj = JSON.stringify(full);
                     return `<button type="button" onclick='infoGood(${obj})' class="btn btn-success btn-sm">ดูรายละเอียด</button>
+                            <button type="button" onclick='addAmount(${full.id})' class="btn btn-primary btn-sm">เพิ่ม</button>
                             <button class="btn btn-warning btn-sm" onclick='editGood(${obj})''> แก้ไข</button>
                             <button class="btn btn-danger btn-sm" onclick="deleteGood(${full.id})"> ลบ</button>
                             `;
@@ -376,6 +384,33 @@ function infoGood(good) {
     console.log('ok');
 }
 
+
+function addAmount(id){
+
+Swal.fire({
+    title: "กรอกจำนวนที่ต้องการเพิ่ม",
+    text: "กรอกเฉพาะตัวเลขเท่านั้น",
+    input: 'number',
+    showCancelButton: true,
+    inputAttributes: {
+        step: 0.01,
+    }
+}).then((result) => {
+    if (result.value) {
+        console.log("Result: " + result.value);
+        $.post("/manage-goods/add-amount", data = {
+                    _token: '{{ csrf_token() }}',
+                    id: id,
+                    amount: result.value,
+                },
+                function (res) {
+                    (res.status == 'success') ? swal.fire(res.title, res.msg, res.status): false;
+                    item_list_table.ajax.reload(null, false);
+                },
+        );
+    }
+});
+}
 
 
 </script>

@@ -34,13 +34,11 @@
                             <tr>
 
                                 <th>ID</th>
-                                <th>วันที่ทำรายการ</th>
-                                <th>รายการ</th>
+                                <th>เลขครุภัณฑ์</th>
+                                <th>ชื่อครุภัณฑ์</th>
                                 <th>จำนวน</th>
                                 <th>หน่วย</th>
-                                <th>ประเภท</th>
-                                <th>ชื่อผู้ยืม</th>
-                                {{-- <th>action</th> --}}
+                                <th>วันที่ทำรายการ</th>
                                 <th>สถานะ</th>
                                 <th>หมายเหตุ</th>
                             </tr>
@@ -58,7 +56,7 @@
 @endsection
 
 @section('script')
-{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs9/sweetalert/2.1.2/sweetalert.min.js" ></script> --}}
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" ></script> --}}
 
 <script>
 
@@ -72,7 +70,7 @@ $("#history_list_table").ready(function () {
         [0, "desc"]
     ],
     "ajax": {
-        "url": "/manage-materials/show-histories",
+        "url": "/goods/show-histories",
         "method": "POST",
         "data": {
             "_token": "{{ csrf_token()}}",
@@ -80,12 +78,25 @@ $("#history_list_table").ready(function () {
     },
     'columnDefs': [
         {
-            "targets": [0, 1, 2, 3, 4, 5,6,7,8],
+            "targets": [0, 1, 2, 3, 4, 5, 6, 7],
             "className": "text-center",
         },
     ],
-    "columns": [{
+    "columns": [
+        {
             "data": "id",
+        },
+        {
+            "data": "good.good_no",
+        },
+        {
+            "data": "good.name",
+        },
+        {
+            "data": "amount",
+        },
+        {
+            "data": "good.unit.name",
         },
         {
         "render": function (data, type, full) {
@@ -93,23 +104,9 @@ $("#history_list_table").ready(function () {
                 return  text;
             }
         },
+
         {
-            "data": "material.name",
-        },
-        {
-            "data": "amount",
-        },
-        {
-            "data": "material.unit.name",
-        },
-        {
-            "data": "material.type.name",
-        },
-        {
-            "data": "user.name",
-        },
-        {
-        "render": function (data, type, full) {
+            "render": function (data, type, full) {
             var text = '';
                 if(full.status == 0){
                     text = '<span class="badge badge-secondary">รอดำเนินการ</span>';
@@ -119,9 +116,6 @@ $("#history_list_table").ready(function () {
                     text = '<span class="badge badge-danger">ไม่อนุมัติ</span>';
                 }else if (full.status == 3){
                     text = '<span class="badge badge-primary">คืนแล้ว</span>';
-                }
-                if(full.material.type.id == 2 && full.status == 1){
-                    text = '<span class="badge badge-secondary">ไม่ต้องคืน</span>';
                 }
                 return  text;
             }
@@ -134,14 +128,9 @@ $("#history_list_table").ready(function () {
                     text = `<span class="badge badge-primary">${moment(full.return_date).format('D/M/YYYY')}</span>`;
                 }else if (full.status == 2){
                     text = `<span class="badge badge-danger">${moment(full.approve_date).format('D/M/YYYY')}</span>`;
-                }
-                if(full.status == 1){
+                }else if(full.status == 1){
                     text = `<span class="badge badge-warning">${moment(full.approve_date).format('D/M/YYYY')}</span>`;
                 }
-                if(full.material.type.id == 2 && full.status == 1){
-                    text = `<span class="badge badge-secondary">${moment(full.approve_date).format('D/M/YYYY')}</span>`;
-                }
-
                 return  text;
             }
         },

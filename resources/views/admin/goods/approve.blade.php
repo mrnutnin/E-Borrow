@@ -34,13 +34,13 @@
                             <tr>
 
                                 <th>ID</th>
-                                <th>วันที่ทำรายการ</th>
+
                                 <th>รายการ</th>
                                 <th>จำนวน</th>
                                 <th>หน่วย</th>
                                 <th>ประเภท</th>
                                 <th>ชื่อผู้ยืม</th>
-                                {{-- <th>action</th> --}}
+                                <th>วันที่ทำรายการ</th>
                                 <th>สถานะ</th>
                                 <th></th>
                             </tr>
@@ -74,7 +74,7 @@ $("#approve_list_table").ready(function () {
         [0, "desc"]
     ],
     "ajax": {
-        "url": "/manage-materials/show-histories",
+        "url": "/manage-goods/show-histories",
         "method": "POST",
         "data": {
             "_token": "{{ csrf_token()}}",
@@ -91,37 +91,26 @@ $("#approve_list_table").ready(function () {
             "data": "id",
         },
         {
-        "render": function (data, type, full) {
-            var text = moment(full.updated_at).format('DD/MM/YYYY');
-                return  text;
-            }
+            "data": "good.good_no",
         },
         {
-            "data": "material.name",
+            "data": "good.name",
         },
         {
             "data": "amount",
         },
         {
-            "data": "material.unit.name",
-        },
-        {
-            "data": "material.type.name",
+            "data": "good.unit.name",
         },
         {
             "data": "user.name",
         },
-        // {
-        // "render": function (data, type, full) {
-        //     var text = '';
-        //         if(full.action == 1){
-        //             text = 'ยืม';
-        //         }else{
-        //             text = 'คืน';
-        //         }
-        //         return  text;
-        //     }
-        // },
+        {
+        "render": function (data, type, full) {
+            var text = moment(full.updated_at).format('DD/MM/YYYY');
+                return  text;
+            }
+        },
         {
         "render": function (data, type, full) {
             var text = '';
@@ -134,10 +123,6 @@ $("#approve_list_table").ready(function () {
                 }else if (full.status == 3){
                     text = '<span class="badge badge-primary">คืนแล้ว</span>';
                 }
-                if(full.status == 1 && full.material.type.id == 2 ){
-                    text = '<span class="badge badge-secondary">ไม่ต้องคืน</span>';
-                }
-
                 return  text;
             }
         },
@@ -145,20 +130,16 @@ $("#approve_list_table").ready(function () {
         "render": function (data, type, full) {
             var text = '';
             if(full.status == 1){
-                text = `<button class="btn btn-primary btn-xs" onclick="updateStatus(${full.id},3)"><i class="ri-checkbox-circle-fill"></i> คืน </button>`;
+                text = `<button class="btn btn-primary btn-sm" onclick="updateStatus(${full.id},3)"><i class="ri-checkbox-circle-fill"></i> คืน </button>`;
             }else if(full.status == 0 ){
-                text = `<button class="btn btn-primary btn-xs" onclick="updateStatus(${full.id},1)"><i class="ri-checkbox-circle-fill"></i> อนุมัติ </button>
-                        <button class="btn btn-danger btn-xs" onclick="updateStatus(${full.id},2)"><i class="ri-close-circle-fill"></i> ไม่อนุมัติ </button>
+                text = `<button class="btn btn-primary btn-sm" onclick="updateStatus(${full.id},1)"><i class="ri-checkbox-circle-fill"></i> อนุมัติ </button>
+                        <button class="btn btn-danger btn-sm" onclick="updateStatus(${full.id},2)"><i class="ri-close-circle-fill"></i> ไม่อนุมัติ </button>
                         `;
             }else if (full.status == 2){
                 text = `<span class="badge badge-danger">${moment(full.approve_date).format('DD MMMM YYYY')}</span>`;
             }else if (full.status == 3){
                 text = `<span class="badge badge-primary">${moment(full.return_date).format('DD MMMM YYYY')}</span>`;
             }
-            if(full.status == 1 && full.material.type.id == 2 ){
-                text = '';
-            }
-
             return  text;
             }
         },
@@ -182,7 +163,7 @@ function updateStatus(id,status){
 
         }).then((result) => {
             if (result.value) {
-                $.post("/manage-materials/approve-borrow", data = {
+                $.post("/manage-goods/approve-borrow", data = {
                         _token: '{{ csrf_token() }}',
                         id: id,
                         status: status,

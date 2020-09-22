@@ -186,7 +186,7 @@ $("#item_list_table").ready(function () {
         "responsive": true,
         "pageLength": 10,
         "order": [
-            [0, "asc"]
+            [5, "asc"]
         ],
         "ajax": {
             "url": "/manage-materials/show-materials",
@@ -197,7 +197,7 @@ $("#item_list_table").ready(function () {
         },
         'columnDefs': [
             {
-                "targets": [0, 1, 2, 3, 4, 5, 6, 7],
+                "targets": [0, 1, 2, 3, 4, 5, 6, 7,8],
                 "className": "text-center",
             },
         ],
@@ -219,6 +219,7 @@ $("#item_list_table").ready(function () {
                 }
             },
             {
+                "data": "amount",
                 "render": function (data, type, full) {
                      var text = `<span style="color : green;"><b>${full.amount}</b></span>`;
                     if (full.amount == 0){
@@ -232,7 +233,7 @@ $("#item_list_table").ready(function () {
             },
             {
                 "render": function (data, type, full) {
-                    return moment(full.updated_at).format('DD MMMM YYYY');
+                    return moment(full.updated_at).format('DD/MM/YYYY');
                 }
             },
             {

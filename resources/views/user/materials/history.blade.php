@@ -39,8 +39,9 @@
                                 <th>จำนวน</th>
                                 <th>หน่วย</th>
                                 <th>ประเภท</th>
-                                <th>action</th>
+                                {{-- <th>action</th> --}}
                                 <th>สถานะ</th>
+                                <th>หมายเหตุ</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -67,7 +68,7 @@ $("#history_list_table").ready(function () {
     "responsive": true,
     "pageLength": 10,
     "order": [
-        [0, "asc"]
+        [0, "desc"]
     ],
     "ajax": {
         "url": "/materials/show-histories",
@@ -82,11 +83,15 @@ $("#history_list_table").ready(function () {
             "className": "text-center",
         },
     ],
-    "columns": [{
+    "columns": [
+        {
             "data": "id",
         },
         {
-            "data": "updated_at",
+        "render": function (data, type, full) {
+            var text = moment(full.updated_at).format('DD/MM/YYYY');
+                return  text;
+            }
         },
         {
             "data": "material.name",
@@ -101,25 +106,37 @@ $("#history_list_table").ready(function () {
             "data": "material.type.name",
         },
         {
-        "render": function (data, type, full) {
-            var text = '';
-                if(full.action == 1){
-                    text = 'ยืม';
-                }else{
-                    text = 'คืน';
-                }
-                return  text;
-            }
-        },
-        {
             "render": function (data, type, full) {
             var text = '';
                 if(full.status == 0){
                     text = '<span class="badge badge-secondary">รอดำเนินการ</span>';
                 }else if (full.status == 1){
-                    text = '<span class="badge badge-primary">อนุมัติแล้ว</span>';
+                    text = '<span class="badge badge-warning">ยังไม่คืน</span>';
                 }else if (full.status == 2){
                     text = '<span class="badge badge-danger">ไม่อนุมัติ</span>';
+                }else if (full.status == 3){
+                    text = '<span class="badge badge-primary">คืนแล้ว</span>';
+                }
+                if(full.material.type.id == 2 && full.status == 1){
+                    text = '<span class="badge badge-secondary">ไม่ต้องคืน</span>';
+                }
+                return  text;
+            }
+        },
+        {
+        "render": function (data, type, full) {
+            var text = '';
+
+                if(full.status == 3){
+                    text = `<span class="badge badge-primary">${moment(full.return_date).format('D/M/YYYY')}</span>`;
+                }else if (full.status == 2){
+                    text = `<span class="badge badge-danger">${moment(full.approve_date).format('D/M/YYYY')}</span>`;
+                }
+                if(full.status == 1){
+                    text = `<span class="badge badge-warning">${moment(full.approve_date).format('D/M/YYYY')}</span>`;
+                }
+                if(full.material.type.id == 2 && full.status == 1){
+                    text = `<span class="badge badge-secondary">${moment(full.approve_date).format('D/M/YYYY')}</span>`;
                 }
                 return  text;
             }

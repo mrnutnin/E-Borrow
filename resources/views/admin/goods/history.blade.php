@@ -34,13 +34,12 @@
                             <tr>
 
                                 <th>ID</th>
-                                <th>วันที่ทำรายการ</th>
-                                <th>รายการ</th>
+                                <th>เลขครุภัณฑ์</th>
+                                <th>ชื่อครุภัณฑ์</th>
                                 <th>จำนวน</th>
                                 <th>หน่วย</th>
-                                <th>ประเภท</th>
                                 <th>ชื่อผู้ยืม</th>
-                                {{-- <th>action</th> --}}
+                                <th>วันที่ทำรายการ</th>
                                 <th>สถานะ</th>
                                 <th>หมายเหตุ</th>
                             </tr>
@@ -72,7 +71,7 @@ $("#history_list_table").ready(function () {
         [0, "desc"]
     ],
     "ajax": {
-        "url": "/manage-materials/show-histories",
+        "url": "/manage-goods/show-histories",
         "method": "POST",
         "data": {
             "_token": "{{ csrf_token()}}",
@@ -94,16 +93,16 @@ $("#history_list_table").ready(function () {
             }
         },
         {
-            "data": "material.name",
+            "data": "good.good_no",
+        },
+        {
+            "data": "good.name",
         },
         {
             "data": "amount",
         },
         {
-            "data": "material.unit.name",
-        },
-        {
-            "data": "material.type.name",
+            "data": "good.unit.name",
         },
         {
             "data": "user.name",
@@ -120,9 +119,6 @@ $("#history_list_table").ready(function () {
                 }else if (full.status == 3){
                     text = '<span class="badge badge-primary">คืนแล้ว</span>';
                 }
-                if(full.material.type.id == 2 && full.status == 1){
-                    text = '<span class="badge badge-secondary">ไม่ต้องคืน</span>';
-                }
                 return  text;
             }
         },
@@ -134,14 +130,9 @@ $("#history_list_table").ready(function () {
                     text = `<span class="badge badge-primary">${moment(full.return_date).format('D/M/YYYY')}</span>`;
                 }else if (full.status == 2){
                     text = `<span class="badge badge-danger">${moment(full.approve_date).format('D/M/YYYY')}</span>`;
-                }
-                if(full.status == 1){
+                }else if(full.status == 1){
                     text = `<span class="badge badge-warning">${moment(full.approve_date).format('D/M/YYYY')}</span>`;
                 }
-                if(full.material.type.id == 2 && full.status == 1){
-                    text = `<span class="badge badge-secondary">${moment(full.approve_date).format('D/M/YYYY')}</span>`;
-                }
-
                 return  text;
             }
         },

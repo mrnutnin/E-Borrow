@@ -6,43 +6,40 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use App\Material;
-use App\BorrowMaterial;
+use App\Good;
+use App\BorrowGood;
 
-class MaterialUserController extends Controller
+class GoodUserController extends Controller
 {
-    //
     public function index()
     {
-        return view('user.materials.index');
+        return view('user.goods.index');
     }
 
-    public function showMaterials()
+    public function showGoods()
     {
         return datatables()->of(
-            Material::query()->with('unit', 'type')->orderBy('updated_at', 'desc')
+            Good::query()->with('unit', 'department')->orderBy('updated_at', 'desc')
         )->toJson();
     }
 
-    public function orderMaterial(Request $req)
+    public function orderGood(Request $req)
     {
         $user = Auth::user();
         $items = $req->array_items;
         $amounts = $req->array_amounts;
-        //dd($req->all());
         $i = 0;
         DB::beginTransaction();
 
-
         foreach ($items as $item) {
-            $borrow = new BorrowMaterial;
+            $borrow = new BorrowGood;
             $borrow->user_id = $user->id;
-            $borrow->material_id = $item['id'];
+            $borrow->good_id = $item['id'];
             $borrow->amount = $amounts[$i];
             $borrow->action = 1;
             $borrow->save();
 
-            $material = Material::find($item['id']);
+            $material = Good::find($item['id']);
             $material->amount -= $amounts[$i];
             $material->save();
 
@@ -62,7 +59,7 @@ class MaterialUserController extends Controller
 
     public function history()
     {
-        return view('user.materials.history');
+        return view('user.goods.history');
     }
 
     public function showHistory(){
@@ -70,7 +67,7 @@ class MaterialUserController extends Controller
         $user = Auth::user();
 
         return datatables()->of(
-            BorrowMaterial::query()->with('material.type', 'material.unit')->where('user_id', $user->id)->orderBy('id', 'asc')
+            BorrowGood::query()->with('good.unit')->where('user_id', $user->id)->orderBy('id', 'asc')
         )->toJson();
 
     }

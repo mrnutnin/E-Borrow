@@ -15,16 +15,14 @@ use Carbon\Carbon;
 
 class MaterialAdminController extends Controller
 {
-    //
-    public function index()
-    {
+
+    public function index(){
         $types = Type::all();
         $units = Unit::all();
         return view('admin.materials.index', compact('types','units'));
     }
 
-    public function showMaterials()
-    {
+    public function showMaterials(){
         return datatables()->of(
             Material::query()->with('unit', 'type')->orderBy('updated_at', 'desc')
         )->toJson();
@@ -103,9 +101,7 @@ class MaterialAdminController extends Controller
         return $data;
     }
 
-
-    public function history()
-    {
+    public function history(){
         return view('admin.materials.history');
     }
 
@@ -117,31 +113,47 @@ class MaterialAdminController extends Controller
 
     }
 
-
-    public function approve()
-    {
+    public function approve(){
         return view('admin.materials.approve');
     }
 
-    public function approveBorrow(Request $req)
-    {
+    public function approveBorrow(Request $req){
         $id = $req->id;
         $status = $req->status;
 
         // dd($status);
-        $borrowMaterial = BorrowMaterial::find($id);
-        $borrowMaterial->status = $status;
-        $borrowMaterial->approve_date = Carbon::now();
-        $borrowMaterial->save();
+        if($status == 1){
+            $borrowMaterial = BorrowMaterial::find($id);
+            $borrowMaterial->status = $status;
+            $borrowMaterial->approve_date = Carbon::now();
+            $borrowMaterial->save();
+        }
 
         if($status == 2){
+            $borrowMaterial = BorrowMaterial::find($id);
+            $borrowMaterial->status = $status;
+            $borrowMaterial->approve_date = Carbon::now();
+            $borrowMaterial->save();
+
             $material = Material::find($borrowMaterial->material_id);
             $material->amount += $borrowMaterial->amount;
             $material->save();
         }
+
+        if($status == 3){
+            $borrowMaterial = BorrowMaterial::find($id);
+            $borrowMaterial->status = $status;
+            $borrowMaterial->return_date = Carbon::now();
+            $borrowMaterial->save();
+
+            $material = Material::find($borrowMaterial->material_id);
+            $material->amount += $borrowMaterial->amount;
+            $material->save();
+        }
+
         $data = [
-            'title' => 'อนุมัติแล้ว',
-            'msg' => 'อนุมัติแล้วรายการยืมนี้แล้ว',
+            'title' => 'สำเร็จ',
+            'msg' => 'ทำรายการสำเร็จแล้ว',
             'status' => 'success',
         ];
         return $data;

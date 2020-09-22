@@ -40,14 +40,15 @@
                 </div>
 
                 <div class="ibox-content">
-                    <table class="table table-bordered" id="material_list_table" style="width:100%" >
+                    <table class="table table-bordered" id="good_list_table" style="width:100%" >
                         <thead>
                             <tr>
                                 <th>ID</th>
                                 <th>ชื่อวัสดุ</th>
-                                <th>ประเภทวัสดุ</th>
                                 <th>จำนวนคงเหลือ</th>
                                 <th>หน่วยนับ</th>
+                                <th>สถานที่จัดเก็บ</th>
+                                <th>สถานะ</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -152,7 +153,7 @@ $( "#cartBtn" ).click(function() {
 
 $( "#order" ).click(function() {
     if(array_items.length > 0 && array_amounts.length > 0){
-        $.post("/materials/order", data = {
+        $.post("/goods/order", data = {
             _token: '{{ csrf_token() }}',
             array_items: array_items,
             array_amounts: array_amounts,
@@ -160,7 +161,7 @@ $( "#order" ).click(function() {
             function (res) {
                 $('#cart').modal('hide');
                 Swal.fire(res.title, res.msg, res.status);
-                material_list_table.ajax.reload();
+                good_list_table.ajax.reload();
             },
         );
     }
@@ -196,7 +197,7 @@ async function addToList(item){
             if (!value || value == 0) {
                 return 'กรุณากรอกจำนวน!';
             }else if(value > item.amount){
-                return 'วัสดุไม่เพียงพอ!';
+                return 'ครุภัณฑ์ไม่เพียงพอ!';
             }else{
 
                 var found = findObjectByKey(array_items, 'id', item.id);
@@ -206,7 +207,6 @@ async function addToList(item){
                     array_amounts.push(value);
                     showCount(array_items.length);
                     console.log(array_items);
-                    // console.log(array_amounts);
                     console.log('case : false');
                 }else{
                     console.log('case : true');
@@ -243,9 +243,9 @@ function findObjectByKey(array, key, value) {
     return 'f';
 }
 
-$("#material_list_table").ready(function () {
+$("#good_list_table").ready(function () {
 
-    material_list_table = $('#material_list_table').DataTable({
+    good_list_table = $('#good_list_table').DataTable({
     "searching": true,
     "responsive": true,
     "pageLength": 10,
@@ -253,7 +253,7 @@ $("#material_list_table").ready(function () {
         [3, "desc"]
     ],
     "ajax": {
-        "url": "/materials/show-materials",
+        "url": "/goods/show-goods",
         "method": "POST",
         "data": {
             "_token": "{{ csrf_token()}}",
@@ -261,7 +261,7 @@ $("#material_list_table").ready(function () {
     },
     'columnDefs': [
         {
-            "targets": [0, 1, 2, 3, 4, 5],
+            "targets": [0, 1, 2, 3, 4, 5, 6],
             "className": "text-center",
         },
     ],
@@ -271,10 +271,6 @@ $("#material_list_table").ready(function () {
         {
             "data": "name",
         },
-        {
-            "data": "type.name",
-        },
-
         {
             "data": "amount",
             "render": function (data, type, full) {
@@ -289,9 +285,21 @@ $("#material_list_table").ready(function () {
             "data": "unit.name",
         },
         {
+            "data": "department.name",
+        },
+        {
+                "render": function (data, type, full) {
+                    var text = '<span class="badge badge-pill badge-info">ปกติ</span>';
+                    if(full.status == 0){
+                        text = '<span class="badge badge-pill badge-danger">ชำรุด</span>';
+                    }
+                    return text;
+                }
+            },
+        {
             "render": function (data, type, full) {
                 var obj = JSON.stringify(full);
-                var button = `<button type="button" onclick='addToList(${obj})' class="btn btn-primary btn-sm"> <i class="ri-add-fill"></i> เบิก <span class="badge badge-light" id="m${full.id}"></span></button>`;
+                var button = `<button type="button" onclick='addToList(${obj})' class="btn btn-primary btn-sm"> <i class="ri-add-fill"></i> เบิก   <span class="badge badge-light" id="m${full.id}"></span> </button>`;
                 if(full.amount == 0){
                     button = `<span class="badge badge-danger">หมดสต๊อก</span>`;
                 }
