@@ -37,5 +37,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    const ADMIN_TYPE = 1;
+    const DEFAULT_TYPE = 0;
+
+    public function isAdmin(){
+        return $this->is_admin === self::ADMIN_TYPE;
+    }
+
 
 }

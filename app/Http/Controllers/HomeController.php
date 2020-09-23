@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
 
@@ -21,8 +22,17 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+    // public function index()
+    // {
+    //     return view('home');
+    // }
+
     public function index()
     {
-        return view('home');
+        if(Auth::user()->is_admin == 1) {
+            return view('admin.home');
+        } else {
+            return view('user.home');
+        }
     }
 }

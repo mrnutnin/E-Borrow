@@ -29,7 +29,7 @@
             <li class="">
                 <a href="{{ url('/home') }}"><i class="fa fa-th-large"></i> <span class="nav-label">Main Page</span> </a>
             </li>
-            {{-- <li class="{{ route::is('manage-goods.*') ? 'active' : '' }}">
+            <li class="{{ route::is('manage-goods.*') ? 'active' : '' }}">
                 <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">จัดการครุภัณฑ์</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li class="{{ route::is('manage-goods.index') ? 'active' : '' }}">
@@ -57,9 +57,9 @@
                         <a href="{{ route('manage-materials.history') }}">ประวัติการ เบิก-คืน วัสดุ</a>
                     </li>
                 </ul>
-            </li> --}}
+            </li>
 
-
+{{-- 
             <li class="{{ route::is('materials.*') ? 'active' : '' }}">
                 <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">-- วัสดุ --</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
@@ -82,7 +82,7 @@
                         <a href="{{ route('goods.history') }}">ประวัติการ เบิก-คืน ครุภัณฑ์</a>
                     </li>
                 </ul>
-            </li>
+            </li> --}}
         </ul>
 
     </div>
