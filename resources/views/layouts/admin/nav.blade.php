@@ -59,7 +59,7 @@
                 </ul>
             </li>
 
-{{-- 
+{{--
             <li class="{{ route::is('materials.*') ? 'active' : '' }}">
                 <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">-- วัสดุ --</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
@@ -83,6 +83,20 @@
                     </li>
                 </ul>
             </li> --}}
+
+        <li class="{{ route::is('cars.*') ? 'active' : '' }}">
+            <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">จัดการรถ</span> <span class="fa arrow"></span></a>
+            <ul class="nav nav-second-level">
+                <li class="{{ route::is('cars.index') ? 'active' : '' }}">
+                    <a href="{{ route('cars.index') }}">  รถ </a>
+                </li>
+                <li class="">
+                    <a href=""> ขายรถ </a>
+                </li>
+            </ul>
+        </li>
+
+
         </ul>
 
     </div>

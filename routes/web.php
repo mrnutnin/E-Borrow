@@ -39,6 +39,15 @@ Route::group(['middleware' => ['user']], function () {
     Route::get('/goods/history', 'User\GoodUserController@history')->name('goods.history');
     Route::post('/goods/show-histories', 'User\GoodUserController@showHistory')->name('goods.show.history');
 
+
+
+
+
+
+
+
+
+
 });
 //Route for admin
 
@@ -67,7 +76,18 @@ Route::group(['middleware' => ['admin']], function(){
     Route::get('/manage-materials/approve', 'Admin\MaterialAdminController@approve')->name('manage-materials.approve');
     Route::post('/manage-materials/approve-borrow', 'Admin\MaterialAdminController@approveBorrow')->name('manage-materials.approve-borrow');
 
+
+
+    Route::get('/cars', 'CarController@index')->name('cars.index');
+    Route::post('/cars/save', 'CarController@saveCar')->name('cars.save');
+    Route::post('/cars/show', 'CarController@showCar')->name('cars.show');
+    Route::post('/cars/delete', 'CarController@deleteCar')->name('cars.delete');
+
+
+
 });
+
+
 
 
 // Route::get('/admin', 'Admin\AdminController@index')->name('admin');
