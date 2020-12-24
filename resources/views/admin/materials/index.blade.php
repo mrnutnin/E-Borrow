@@ -20,7 +20,7 @@
                 </div>
 
                 <div class="ibox-content">
-                    <table class="table table-bordered" id="item_list_table" style="width:100%" >
+                    <table class="table table-bordered" id="item_list_table" style="width:100%;" >
                         <thead>
                             <tr >
 
@@ -181,10 +181,11 @@ $( "#modal2Btn" ).click(function() {
 
 $("#item_list_table").ready(function () {
 
-    item_list_table = $('#item_list_table').DataTable({
+    var item_list_table = $('#item_list_table').DataTable({
         "searching": true,
         "responsive": true,
-        "pageLength": 10,
+        "lengthMenu": [ 10, 25, 50, 75, 100 ],
+        // "pageLength": 10,
         "order": [
             [5, "asc"]
         ],

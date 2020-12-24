@@ -19,4 +19,9 @@ class Material extends Model
     {
         return $this->belongsTo(Unit::class);
     }
+
+    public function receiptMaterials()
+    {
+        return $this->hasMany(ReceiptMaterial::class, 'material_id');
+    }
 }

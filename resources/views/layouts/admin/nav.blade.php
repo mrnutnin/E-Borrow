@@ -84,18 +84,31 @@
                 </ul>
             </li> --}}
 
-        <li class="{{ route::is('cars.*') ? 'active' : '' }}">
-            <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">จัดการรถ</span> <span class="fa arrow"></span></a>
-            <ul class="nav nav-second-level">
-                <li class="{{ route::is('cars.index') ? 'active' : '' }}">
-                    <a href="{{ route('cars.index') }}">  รถ </a>
-                </li>
-                <li class="">
-                    <a href=""> ขายรถ </a>
-                </li>
-            </ul>
-        </li>
 
+            <li class="{{ route::is('generals.*') ? 'active' : '' }}">
+                <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">ตั้งค่าทั่วไป</span> <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li class="{{ route::is('generals.manage-units.index') ? 'active' : '' }}">
+                        <a href="{{ route('generals.manage-units.index') }}">ตั้งค่าหน่วยนับ</a>
+                    </li>
+                    <li class="{{ route::is('generals.manage-departments.index') ? 'active' : '' }}">
+                        <a href="{{ route('generals.manage-departments.index') }}">ตั้งค่าหน่วยงาน</a>
+                    </li>
+                    <li class="{{ route::is('generals.manage-types.index') ? 'active' : '' }}">
+                        <a href="{{ route('generals.manage-types.index') }}">ตั้งค่าประเภทวัสดุ</a>
+                    </li>
+                </ul>
+            </li>
+
+
+            <li class="{{ route::is('reports.*') ? 'active' : '' }}">
+                <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">รายงาน</span> <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li class="{{ route::is('reports.index') ? 'active' : '' }}">
+                        <a href="{{ route('reports.index') }}">รายงาน</a>
+                    </li>
+                </ul>
+            </li>
 
         </ul>
 

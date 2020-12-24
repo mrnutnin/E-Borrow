@@ -29,7 +29,7 @@
                 </div>
 
                 <div class="ibox-content">
-                    <table class="table table-bordered" id="history_list_table" style="width:100%" >
+                    <table class="table table-bordered" id="history_list_table" style="width:100%; " >
                         <thead>
                             <tr>
 
@@ -61,12 +61,13 @@
 {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs9/sweetalert/2.1.2/sweetalert.min.js" ></script> --}}
 
 <script>
-
+ var history_list_table = '';
 $("#history_list_table").ready(function () {
 
-    var history_list_table = $('#history_list_table').DataTable({
+     history_list_table = $('#history_list_table').DataTable({
     "searching": true,
     "responsive": true,
+    "lengthMenu": [ 10, 25, 50, 75, 100 ],
     "pageLength": 10,
     "order": [
         [0, "desc"]

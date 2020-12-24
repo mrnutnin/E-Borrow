@@ -40,20 +40,13 @@ Route::group(['middleware' => ['user']], function () {
     Route::post('/goods/show-histories', 'User\GoodUserController@showHistory')->name('goods.show.history');
 
 
-
-
-
-
-
-
-
-
 });
-//Route for admin
 
+//Route for admin
 Route::group(['middleware' => ['admin']], function(){
     // Route::get('/dashboard', 'admin\AdminController@index');
     Route::get('/admin', 'Admin\AdminController@index')->name('admin');
+    // Route::get('/home', 'Admin\AdminController@index')->name('admin');
 
     Route::get('/manage-goods', 'Admin\GoodAdminController@index')->name('manage-goods.index');
     Route::post('/manage-goods/show-goods', 'Admin\GoodAdminController@showGood')->name('manage-goods.show');
@@ -76,14 +69,33 @@ Route::group(['middleware' => ['admin']], function(){
     Route::get('/manage-materials/approve', 'Admin\MaterialAdminController@approve')->name('manage-materials.approve');
     Route::post('/manage-materials/approve-borrow', 'Admin\MaterialAdminController@approveBorrow')->name('manage-materials.approve-borrow');
 
+    //Generals
+    //Unit
+    Route::get('/generals/manage-units', 'Admin\GeneralController@indexUnit')->name('generals.manage-units.index');
+    Route::post('/generals/manage-units/show', 'Admin\GeneralController@showUnits')->name('generals.manage-units.show');
+    Route::post('/generals/manage-units/store', 'Admin\GeneralController@storeUnit')->name('generals.manage-units.store');
+    Route::post('/generals/manage-units/delete', 'Admin\GeneralController@deleteUnit')->name('generals.manage-units.delete');
+
+    //Type
+    Route::get('/generals/manage-types', 'Admin\GeneralController@indexType')->name('generals.manage-types.index');
+    Route::post('/generals/manage-types/show', 'Admin\GeneralController@showTypes')->name('generals.manage-types.show');
+    Route::post('/generals/manage-types/store', 'Admin\GeneralController@storeType')->name('generals.manage-types.store');
+    Route::post('/generals/manage-types/delete', 'Admin\GeneralController@deleteType')->name('generals.manage-types.delete');
+
+    //Department
+    Route::get('/generals/manage-departments', 'Admin\GeneralController@indexDepartment')->name('generals.manage-departments.index');
+    Route::post('/generals/manage-departments/show', 'Admin\GeneralController@showDepartments')->name('generals.manage-departments.show');
+    Route::post('/generals/manage-departments/store', 'Admin\GeneralController@storeDepartment')->name('generals.manage-departments.store');
+    Route::post('/generals/manage-departments/delete', 'Admin\GeneralController@deleteDepartment')->name('generals.manage-departments.delete');
 
 
-    Route::get('/cars', 'CarController@index')->name('cars.index');
-    Route::post('/cars/save', 'CarController@saveCar')->name('cars.save');
-    Route::post('/cars/show', 'CarController@showCar')->name('cars.show');
-    Route::post('/cars/delete', 'CarController@deleteCar')->name('cars.delete');
+    //Report
+    Route::get('/report', 'Admin\ReportController@index')->name('reports.index');
+    Route::get('/report/show-good-excel', 'Admin\ReportController@showGoodExcel')->name('reports.goods.show');
+    Route::post('/report/export-good-excel', 'Admin\ReportController@exportGoodExcel')->name('reports.goods.export');
 
-
+    Route::get('/report/show-mat-excel', 'Admin\ReportController@showMatExcel')->name('reports.mats.show');
+    Route::post('/report/export-mat-excel', 'Admin\ReportController@exportMatExcel')->name('reports.mats.export');
 
 });
 
