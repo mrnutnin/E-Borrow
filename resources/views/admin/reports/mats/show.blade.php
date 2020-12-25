@@ -48,7 +48,7 @@
                 <br>
                 <br>
                 <br>
-                <form action="{{ route('reports.goods.export')}}" method="POST">
+                <form action="{{ route('reports.mats.export')}}" method="POST">
                     @csrf
                     <input type="hidden" name="bigData" value="{{ json_encode($bigData) }}">
                     <button type="submit" class="btn btn-success"><i class="fa fa-download" aria-hidden="true"></i> Export Excel </button>

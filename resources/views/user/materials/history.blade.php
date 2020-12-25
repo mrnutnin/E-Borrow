@@ -94,16 +94,16 @@ $("#history_list_table").ready(function () {
             }
         },
         {
-            "data": "material.name",
+            "data": "name",
         },
         {
             "data": "amount",
         },
         {
-            "data": "material.unit.name",
+            "data": "unit",
         },
         {
-            "data": "material.type.name",
+            "data": "type",
         },
         {
             "render": function (data, type, full) {

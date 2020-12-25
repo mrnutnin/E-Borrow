@@ -53,7 +53,19 @@ class MaterialAdminController extends Controller
 
     public function deleteMaterial(Request $req){
         //dd($req->all());
+        $borrowMaterial = BorrowMaterial::where('material_id', $req->id)->whereIn('status', [0])->first();
+        if($borrowMaterial){
+            $data = [
+                'title' => 'ลบไม่สำเร็จ',
+                'msg' => 'มีรายการรออนุมัติ โปรดอนุมัติหรือยกเลิกรายการก่อน',
+                'status' => 'error',
+            ];
+
+            return $data;
+        }
+        
         DB::beginTransaction();
+
         $material = Material::find($req->id);
         if($material->delete()){
             $data = [

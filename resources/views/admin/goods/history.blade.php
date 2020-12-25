@@ -93,16 +93,16 @@ $("#history_list_table").ready(function () {
             }
         },
         {
-            "data": "good.good_no",
+            "data": "good_no",
         },
         {
-            "data": "good.name",
+            "data": "name",
         },
         {
             "data": "amount",
         },
         {
-            "data": "good.unit.name",
+            "data": "unit",
         },
         {
             "data": "user.name",

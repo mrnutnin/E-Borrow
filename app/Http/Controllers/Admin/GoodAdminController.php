@@ -62,6 +62,17 @@ class GoodAdminController extends Controller
     public function deleteGood(Request $req){
         //dd($req->all());
         DB::beginTransaction();
+
+        $borrowGood = BorrowGood::where('good_id', $req->id)->whereIn('status', [0])->first();
+        if($borrowGood){
+            $data = [
+                'title' => 'ลบไม่สำเร็จ',
+                'msg' => 'มีรายการรออนุมัติ โปรดอนุมัติหรือยกเลิกรายการก่อน',
+                'status' => 'error',
+            ];
+
+            return $data;
+        }
         $good = Good::find($req->id);
         if($good->delete()){
             $data = [

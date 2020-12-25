@@ -44,77 +44,78 @@
         <div class="row">
             <div class="center">
 
-            <table class="display nowrap" style="width:100%" id="simple_table">
-                <thead>
-                    <tr style="text-algin:center; ">
-                        <th style="border: none;" colspan="13">รายการครุภัณฑ์ ประจำปีงบประมาณ  {{$bigData['thead']['year'] }}</th>
-                    </tr>
-                    <tr style="text-algin:center;">
-                        <th style="border: none;" colspan="13">สาขาวิชาวิศวะกรรมคอมพิวเตอร์ มหาวิทยาลัยเทคโนโลยีราชมงตลอีสาน วิทยาเขตขอนแก่น</th>
-                    </tr>
-                    @if($bigData['thead']['text'] !='')
-                    <tr style="text-algin:center;">
-                        <th style="border: none;" colspan="13">{{$bigData['thead']['text'] }}</th>
-                    </tr>
-                    @endif
+                <table class="display nowrap" style="width:100%" id="simple_table">
+                    <thead>
+                        <tr style="text-algin:center; ">
+                            <th style="border: none;" colspan="13"> {{ $bigData['thead']['text']}}  </th>
+                        </tr>
+                        <tr style="text-algin:center;">
+                            <th style="border: none;" colspan="13">สาขาวิชาวิศวะกรรมคอมพิวเตอร์ คณะวิศวกรรมศาสตร์ มหาวิทยาลัยเทคโนโลยีราชมงตลอีสาน วิทยาเขตขอนแก่น</th>
+                        </tr>
+                        {{-- @if($bigData['thead']['text'] != '')
+                        <tr style="text-algin:center;">
+                            <th style="border: none;" colspan="13">{{$bigData['thead']['text'] }}</th>
+                        </tr>
+                        @endif --}}
+                        <tr style="text-algin:center;">
+                            <th rowspan="2">ที่</th>
+                            <th rowspan="2">รายการวัสดุ</th>
+                            <th rowspan="2">หน่วย</th>
+                            <th rowspan="2">ราคาต่อหน่วย</th>
+                            <th colspan="2">คงเหลือยกมา</th>
+                            <th colspan="2">รับ</th>
+                            <th colspan="2">จ่าย</th>
+                            <th colspan="2">คงเหลือ</th>
+                            <th rowspan="2">หมายเหตุ</th>
 
-                    <tr>
-                        <th rowspan="2">ที่</th>
-                        <th rowspan="2">หน่วยงาน</th>
-                        <th rowspan="2">วันที่ซื้อ</th>
-                        <th rowspan="2">หมายเลขครุภัณฑ์</th>
-                        <th rowspan="2">รายการ</th>
-                        <th rowspan="2">จำนวน</th>
-                        <th rowspan="2">หน่วยนับ</th>
-                        <th rowspan="2">ราคาต่อหน่วย</th>
-                        <th rowspan="2">ราคารวม</th>
-                        <th colspan="2">สภาพ</th>
-                        <th rowspan="2">สถานที่เก็บ</th>
-                        <th rowspan="2">หมายเหตุ</th>
-                    </tr>
-                    <tr>
-                        <th>ปกติ</th>
-                        <th>ชำรุด</th>
+                        </tr>
+                        <tr style="text-algin:center;">
+                            <th>จำนวน</th>
+                            <th>จำนวนเงิน</th>
+                            <th>จำนวน</th>
+                            <th>จำนวนเงิน</th>
+                            <th>จำนวน</th>
+                            <th>จำนวนเงิน</th>
+                            <th>จำนวน</th>
+                            <th>จำนวนเงิน</th>
 
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($bigData['tbodies'] as $row)
-                    <tr>
-                        <td> {{ $bigData['thead']['i'] ++ }} </td>
-                        <td> {{ $row['department']['name'] }} </td>
-                        <td style="text-align: center;"> {{ date("d/m/Y", strtotime($row['buy_date']))}} </td>
-                        <td> {{ $row['good_no'] }} </td>
-                        <td> {{ $row['name'] }} </td>
-                        <td style="text-align: center;"> {{ $row['amount'] }} </td>
-                        <td style="text-align: center;"> {{ $row['unit']['name'] }} </td>
-                        <td style="text-align: right;"> {{ number_format($row['price_unit'], 2) }} </td>
-                        <td style="text-align: right;"> {{ number_format($row['price_unit'] *  $row['amount'], 2) }} </td>
-                        @if( $row['status'] == 1 )
-                        <td style="text-align: center;"> / </td>
-                        <td>  </td>
-                        @else
-                        <td>  </td>
-                        <td style="text-align: center;"> / </td>
-                        @endif
-                        <td> {{ $row['place'] }} </td>
-                        <td> {{ $row['remark'] }} </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <th colspan="7"></th>
-                        <th>รวม</th>
-                        <th style="text-align: right;"> {{ number_format($bigData['tfoot']['total'], 2) }}</th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </tfoot>
-            </table>
-
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($bigData['tbodies'] as $row)
+                        <tr>
+                            <td style="text-align: center;"> {{ $bigData['thead']['i'] ++ }}</td>
+                            <td> {{ $row['mat']['name'] }} </td>
+                            <td style="text-align: center;"> {{ $row['mat']['unit']['name'] }} </td>
+                            <td style="text-align: right;"> {{ $row['mat']['price_unit'] }} </td>
+                            <td style="text-align: right;"> {{ $row['remain'] }} </td>
+                            <td style="text-align: right;"> {{ number_format($row['remain'] * $row['mat']['price_unit'], 2) }} </td>
+                            <td style="text-align: right;"> {{ $row['receive'] }} </td>
+                            <td style="text-align: right;"> {{ number_format($row['receive'] * $row['mat']['price_unit'], 2) }} </td>
+                            <td style="text-align: right;"> {{ $row['spent'] }} </td>
+                            <td style="text-align: right;"> {{ number_format($row['spent'] * $row['mat']['price_unit'], 2) }} </td>
+                            <td style="text-align: right;"> {{ $row['balance'] }} </td>
+                            <td style="text-align: right;"> {{ number_format($row['balance'] * $row['mat']['price_unit'], 2) }}  </td>
+                            @if($row['mat']['amount'] == 0 )
+                            <td> หมดสต๊อก </td>
+                            @else
+                            <td> </td>
+                            @endif
+                        </tr>
+                        @endforeach
+                    </tbody>
+                    <tfoot>
+                        {{-- <tr>
+                            <th colspan="7"></th>
+                            <th>รวม</th>
+                            <th style="text-align: right;"> </th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr> --}}
+                    </tfoot>
+                </table>
         </div>
     </div>
 </body>

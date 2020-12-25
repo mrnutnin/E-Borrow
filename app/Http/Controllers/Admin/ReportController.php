@@ -36,15 +36,25 @@ class ReportController extends Controller
                 ->orderBy('updated_at', 'desc')
                 ->get();
             $sum = Good::select(DB::raw('sum(amount * price_unit) as total'))->first();
-        }else{
+        }else if($select == 2){
             $goods = Good::with('unit', 'department')
-                ->where('price_unit' , '<=', 5000)
+                ->where('price_unit' , '<', 5000)
                 ->orderBy('updated_at', 'desc')
                 ->get();
 
             $sum = Good::select(DB::raw('sum(amount * price_unit) as total'))->where('price_unit' , '<=', 5000)->first();
 
             $text = 'รายการครุภัณฑ์ที่มีมูลค่าต่ำกว่า 5,000 บาท';
+
+        }else{
+            $goods = Good::with('unit', 'department')
+                ->where('price_unit' , '>=', 5000)
+                ->orderBy('updated_at', 'desc')
+                ->get();
+
+            $sum = Good::select(DB::raw('sum(amount * price_unit) as total'))->where('price_unit' , '<=', 5000)->first();
+
+            $text = 'รายการครุภัณฑ์ที่มีมูลค่ามากกว่า 5,000 บาท';
         }
 
         $thead = [
@@ -99,17 +109,17 @@ class ReportController extends Controller
             $balance = 0;
 
             if($select == 2 || $select == '2'){
-                $remain = ReceiptMaterial::where('material_id', $mat->id)->sum('amount') + BorrowMaterial::where('material_id', $mat->id)->where('status', 1)->sum('amount') + $mat->amount;
-                $receive = ReceiptMaterial::where('material_id', $mat->id)->sum('amount') + BorrowMaterial::where('material_id', $mat->id)->where('status', 1)->sum('amount') + $mat->amount;
+                $remain =  BorrowMaterial::where('material_id', $mat->id)->whereIn('status', [0,1])->sum('amount') + $mat->amount;
+                $receive =  BorrowMaterial::where('material_id', $mat->id)->whereIn('status', [0,1])->sum('amount') + $mat->amount;
                 $spent = BorrowMaterial::where('material_id', $mat->id)->where('status', 1)->sum('amount');
-                $balance = BorrowMaterial::where('material_id', $mat->id)->where('status', 0)->sum('amount') + $mat->amount;
+                $balance = BorrowMaterial::where('material_id', $mat->id)->whereIn('status', [0])->sum('amount') + $mat->amount;
 
             }else{
 
-                $remain = ReceiptMaterial::where('material_id', $mat->id)->sum('amount') + BorrowMaterial::where('material_id', $mat->id)->where('approve_date', '!=', null)->sum('amount') + $mat->amount;
-                $receive = ReceiptMaterial::where('material_id', $mat->id)->sum('amount') + BorrowMaterial::where('material_id', $mat->id)->where('approve_date', '!=', null)->sum('amount')+ $mat->amount;
-                $spent = BorrowMaterial::where('material_id', $mat->id)->where('approve_date', '!=', null)->sum('amount');
-                $balance = $mat->amount;
+                $remain =  BorrowMaterial::where('material_id', $mat->id)->whereIn('status', [0,1])->sum('amount') + $mat->amount;
+                $receive =  BorrowMaterial::where('material_id', $mat->id)->whereIn('status', [0,1])->sum('amount')+ $mat->amount;
+                $spent = BorrowMaterial::where('material_id', $mat->id)->where('status', 1)->sum('amount');
+                $balance = $receive - $spent;
             }
 
 
@@ -125,8 +135,6 @@ class ReportController extends Controller
 
             array_push($tbodies, $data);
         }
-
-
 
         $thead = [
             "currentDate" => $currentDate,

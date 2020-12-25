@@ -32,16 +32,22 @@ class GoodUserController extends Controller
         DB::beginTransaction();
 
         foreach ($items as $item) {
+            $good = Good::find($item['id']);
+            $good->amount -= $amounts[$i];
+            $good->save();
+
             $borrow = new BorrowGood;
             $borrow->user_id = $user->id;
             $borrow->good_id = $item['id'];
             $borrow->amount = $amounts[$i];
+            $borrow->name = $good->name;
+            $borrow->good_no = $good->good_no;
+            $borrow->unit = $good->unit;
+            $borrow->user_name = $user->name;
             $borrow->action = 1;
             $borrow->save();
 
-            $material = Good::find($item['id']);
-            $material->amount -= $amounts[$i];
-            $material->save();
+
 
             $i++;
         }

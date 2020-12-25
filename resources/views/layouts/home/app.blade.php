@@ -96,7 +96,7 @@
 <script type="text/javascript" src="/js/plugins/dataTables/dataTables.responsive.min.js"></script>
 
 {{-- <script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.10.21/r-2.2.5/datatables.min.js"></script> --}}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" ></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
 @section('script')

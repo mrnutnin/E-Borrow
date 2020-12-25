@@ -177,11 +177,11 @@ $( "#modal2Btn" ).click(function() {
     $('#modal2').modal('show');
     console.log('ok');
 });
-
+var item_list_table = '';
 
 $("#item_list_table").ready(function () {
 
-    var item_list_table = $('#item_list_table').DataTable({
+     item_list_table = $('#item_list_table').DataTable({
         "searching": true,
         "responsive": true,
         "lengthMenu": [ 10, 25, 50, 75, 100 ],
@@ -285,7 +285,7 @@ function deleteMaterial(id) {
                     id: id,
                 },
                 function (res) {
-                    (res.status == 'success') ? Swal.fire(res.title, res.msg, res.status) : false;
+                    Swal.fire(res.title, res.msg, res.status);
                     item_list_table.ajax.reload();
                 },
             );
@@ -349,7 +349,7 @@ function addAmount(id){
                         amount: result.value,
                     },
                     function (res) {
-                        (res.status == 'success') ? swal.fire(res.title, res.msg, res.status): false;
+                        swal.fire(res.title, res.msg, res.status);
                         item_list_table.ajax.reload(null, false);
                     },
             );

@@ -334,7 +334,7 @@ function deleteGood(id) {
                     id: id,
                 },
                 function (res) {
-                    (res.status == 'success') ? Swal.fire(res.title, res.msg, res.status) : false;
+                    Swal.fire(res.title, res.msg, res.status);
                     item_list_table.ajax.reload();
                 },
             );
@@ -404,7 +404,7 @@ Swal.fire({
                     amount: result.value,
                 },
                 function (res) {
-                    (res.status == 'success') ? swal.fire(res.title, res.msg, res.status): false;
+                    swal.fire(res.title, res.msg, res.status);
                     item_list_table.ajax.reload(null, false);
                 },
         );

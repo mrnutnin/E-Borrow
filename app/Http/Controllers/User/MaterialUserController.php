@@ -35,16 +35,21 @@ class MaterialUserController extends Controller
 
 
         foreach ($items as $item) {
+            $material = Material::with('type', 'unit')->where('id', $item['id'])->first();
+            $material->amount -= $amounts[$i];
+            $material->save();
+
             $borrow = new BorrowMaterial;
             $borrow->user_id = $user->id;
             $borrow->material_id = $item['id'];
             $borrow->amount = $amounts[$i];
+            $borrow->name = $material->name;
+            $borrow->type = $material->type->name;
+            $borrow->unit = $material->unit->name;
+            $borrow->user_name = $user->name;
             $borrow->action = 1;
             $borrow->save();
 
-            $material = Material::find($item['id']);
-            $material->amount -= $amounts[$i];
-            $material->save();
 
             $i++;
         }

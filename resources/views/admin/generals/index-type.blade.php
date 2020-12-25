@@ -20,7 +20,7 @@
                             <i class="fa fa-plus"></i> เพิ่ม
                         </button>
                     </div>
-                    <h3>รายการหน่วยนับ</h3>
+                    <h3>รายการประเภทวัสดุ</h3>
                 </div>
                 <div class="ibox-content">
                     <table class="table table-bordered" id="item_list_table" style="width:100%" >

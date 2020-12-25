@@ -97,19 +97,19 @@ $("#approve_list_table").ready(function () {
             }
         },
         {
-            "data": "material.name",
+            "data": "name",
         },
         {
             "data": "amount",
         },
         {
-            "data": "material.unit.name",
+            "data": "unit",
         },
         {
-            "data": "material.type.name",
+            "data": "type",
         },
         {
-            "data": "user.name",
+            "data": "user_name",
         },
         // {
         // "render": function (data, type, full) {
@@ -134,7 +134,7 @@ $("#approve_list_table").ready(function () {
                 }else if (full.status == 3){
                     text = '<span class="badge badge-primary">คืนแล้ว</span>';
                 }
-                if(full.status == 1 && full.material.type.id == 2 ){
+                if(full.status == 1 && full.type == 'สิ้นเปลือง' ){
                     text = '<span class="badge badge-secondary">ไม่ต้องคืน</span>';
                 }
 
@@ -155,7 +155,7 @@ $("#approve_list_table").ready(function () {
             }else if (full.status == 3){
                 text = `<span class="badge badge-primary">${moment(full.return_date).format('DD MMMM YYYY')}</span>`;
             }
-            if(full.status == 1 && full.material.type.id == 2 ){
+            if(full.status == 1 && full.type == 'สิ้นเปลือง' ){
                 text = '';
             }
 

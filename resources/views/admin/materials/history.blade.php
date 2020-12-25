@@ -95,19 +95,19 @@ $("#history_list_table").ready(function () {
             }
         },
         {
-            "data": "material.name",
+            "data": "name",
         },
         {
             "data": "amount",
         },
         {
-            "data": "material.unit.name",
+            "data": "unit",
         },
         {
-            "data": "material.type.name",
+            "data": "type",
         },
         {
-            "data": "user.name",
+            "data": "user_name",
         },
         {
         "render": function (data, type, full) {
@@ -121,7 +121,7 @@ $("#history_list_table").ready(function () {
                 }else if (full.status == 3){
                     text = '<span class="badge badge-primary">คืนแล้ว</span>';
                 }
-                if(full.material.type.id == 2 && full.status == 1){
+                if(full.type == 'สิ้นเปลือง' && full.status == 1){
                     text = '<span class="badge badge-secondary">ไม่ต้องคืน</span>';
                 }
                 return  text;
@@ -139,7 +139,7 @@ $("#history_list_table").ready(function () {
                 if(full.status == 1){
                     text = `<span class="badge badge-warning">${moment(full.approve_date).format('D/M/YYYY')}</span>`;
                 }
-                if(full.material.type.id == 2 && full.status == 1){
+                if(full.type == 'สิ้นเปลือง' && full.status == 1){
                     text = `<span class="badge badge-secondary">${moment(full.approve_date).format('D/M/YYYY')}</span>`;
                 }
 
