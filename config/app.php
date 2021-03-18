@@ -176,7 +176,10 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         Yajra\DataTables\DataTablesServiceProvider::class,
-        // Maatwebsite\Excel\ExcelServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+
+        Barryvdh\DomPDF\ServiceProvider::class,
+        Aacotroneo\Saml2\Saml2ServiceProvider::class,
 
     ],
 
@@ -230,7 +233,9 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
-        // 'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        // 'Saml2' => Aacotroneo\Saml2\Facades\Saml2Auth::class,
 
     ],
 

@@ -21,6 +21,9 @@ Route::get('logout', 'Auth\LoginController@logout', function () {
 
 Auth::routes();
 
+Route::get('/loginSSO', 'Auth\LoginSSOController@loginSSO')->name('loginSSO');
+Route::get('/login-sso', 'Auth\LoginSSOController@getLogin');
+Route::get('/logout-sso', 'Auth\LoginSSOController@getLogout');
 //Route for normal user
 Route::group(['middleware' => ['user']], function () {
     // Route::get('/home', 'HomeController@index');
@@ -91,10 +94,12 @@ Route::group(['middleware' => ['admin']], function(){
 
     //Report
     Route::get('/report', 'Admin\ReportController@index')->name('reports.index');
-    Route::get('/report/show-good-excel', 'Admin\ReportController@showGoodExcel')->name('reports.goods.show');
+    Route::get('/report/show-good-report', 'Admin\ReportController@showGoodReport')->name('reports.goods.show');
     Route::post('/report/export-good-excel', 'Admin\ReportController@exportGoodExcel')->name('reports.goods.export');
+    Route::get('/report/show-good-pdf', 'Admin\ReportController@exportGoodPDF')->name('reports.goods.pdf.export');
 
-    Route::get('/report/show-mat-excel', 'Admin\ReportController@showMatExcel')->name('reports.mats.show');
+
+    Route::get('/report/show-mat-report', 'Admin\ReportController@showMatReport')->name('reports.mats.show');
     Route::post('/report/export-mat-excel', 'Admin\ReportController@exportMatExcel')->name('reports.mats.export');
 
 });

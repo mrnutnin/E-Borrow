@@ -32,7 +32,7 @@ class LoginController extends Controller
     {
         switch(Auth::user()->is_admin){
             case 1:
-                  $this->redirectTo = '/admin';
+                $this->redirectTo = '/admin';
                 return $this->redirectTo;
                 break;
             case 0:
@@ -42,7 +42,6 @@ class LoginController extends Controller
             default:
                 $this->redirectTo = '/login';
                 return $this->redirectTo;
-
         }
     }
 
@@ -53,6 +52,11 @@ class LoginController extends Controller
      */
     public function __construct()
     {
+
+
+        return redirect('https://service.eng.rmuti.ac.th/eng-lgout/logout/?id=10&secret=SAWASDEE&msg=');
+
         $this->middleware('guest')->except('logout');
     }
 }
+

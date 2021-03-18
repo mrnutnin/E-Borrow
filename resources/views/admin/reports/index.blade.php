@@ -45,9 +45,13 @@
                         </div>
                         <div class="col-md-4">
                             <div class="pull-right">
-                            <button style="background-color: #4CAF50; color: white; margin-right:3px;" form="goodExport" type="submit" class="btn btn">
-                            <i class="fa fa-search"></i> ShowExcel
+                            <button style="background-color: #4CAF50; color: white; margin-right:3px;" name="type" value="excel" form="goodExport" type="submit" class="btn btn">
+                            <i class="fa fa-file-excel-o"></i> ShowExcel
                             </button>
+
+                            <button style="background-color: #1c84c6; color: white; margin-right:3px;" name="type" value="pdf" form="goodExport" type="submit" class="btn btn">
+                                <i class="fa fa-file-pdf-o"></i> ShowPDF
+                                </button>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -104,9 +108,13 @@
                         </div>
                         <div class="col-md-4">
                             <div class="pull-right">
-                            <button style="background-color: #4CAF50; color: white; margin-right:3px;" form="matExport" type="submit" class="btn btn">
-                            <i class="fa fa-search"></i> ShowExcel
+                            <button style="background-color: #4CAF50; color: white; margin-right:3px;" form="matExport" name="type" value="excel" type="submit" class="btn btn">
+                            <i class="fa fa-file-excel-o"></i> ShowExcel
                             </button>
+
+                            <button style="background-color: #1c84c6; color: white; margin-right:3px;" form="matExport"  name="type" value="pdf" type="submit" class="btn btn">
+                                <i class="fa fa-file-pdf-o"></i> ShowPDF
+                                </button>
                             </div>
                         </div>
                         <div class="col-md-4">

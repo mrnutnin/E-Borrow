@@ -13,6 +13,7 @@ use App\Type;
 use App\ReceiptMaterial;
 use App\BorrowMaterial;
 use Maatwebsite\Excel\Facades\Excel;
+use PDF;
 
 class ReportController extends Controller
 {
@@ -22,7 +23,7 @@ class ReportController extends Controller
         return view('admin.reports.index', compact('types'));
     }
 
-    public function showGoodExcel(Request $req){
+    public function showGoodReport(Request $req){
 
         $year = $req->year;
         $select = $req->select;
@@ -70,7 +71,14 @@ class ReportController extends Controller
             "tfoot" => $sum,
         ];
         //return $bigData ;
-       return view('admin.reports.goods.show' ,compact('bigData'));
+        if($req->type == 'excel'){
+            return view('admin.reports.goods.show', compact('bigData'));
+        }else{
+            $pdf = PDF::loadView('admin.reports.goods.export', compact('bigData'));
+            $pdf->setPaper('A4', 'landscape');
+            return $pdf->stream('report.pdf'); //แบบนี้จะ stream มา preview
+        }
+
     }
 
     public function exportGoodExcel(Request $req){
@@ -79,7 +87,7 @@ class ReportController extends Controller
         return Excel::download(new GoodsExport($bigData), 'ExportExcel.xlsx');
     }
 
-    public function showMatExcel(Request $req){
+    public function showMatReport(Request $req){
 
         $year = $req->year;
         $select = $req->select;
@@ -149,7 +157,15 @@ class ReportController extends Controller
             "tfoot" => $sum,
         ];
 
-        return view('admin.reports.mats.show' ,compact('bigData'));
+        if ($req->type == 'excel') {
+            return view('admin.reports.mats.show', compact('bigData'));
+        } else {
+            $pdf = PDF::loadView('admin.reports.mats.export', compact('bigData'));
+            $pdf->setPaper('A4', 'landscape');
+           return $pdf->stream('report.pdf'); //แบบนี้จะ stream มา preview
+        }
+
+        //return view('admin.reports.mats.show' ,compact('bigData'));
     }
 
     public function exportMatExcel(Request $req){
@@ -157,4 +173,7 @@ class ReportController extends Controller
 
         return Excel::download(new MatsExport($bigData), 'ExportExcel.xlsx');
     }
+
+
+
 }
