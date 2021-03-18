@@ -53,7 +53,7 @@ class LoginController extends Controller
     public function __construct()
     {
 
-        return redirect('https://service.eng.rmuti.ac.th/eng-logout/login/get/');
+        // return redirect('https://service.eng.rmuti.ac.th/eng-logout/login/get/');
 
         $this->middleware('guest')->except('logout');
     }
