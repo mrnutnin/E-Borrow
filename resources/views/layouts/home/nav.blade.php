@@ -15,6 +15,7 @@
                     </span>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
                         <li>
+                            
                             <a href="{{ route('logout') }}"
                             onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();">Logout

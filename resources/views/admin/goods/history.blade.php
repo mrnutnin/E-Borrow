@@ -86,26 +86,27 @@ $("#history_list_table").ready(function () {
     "columns": [{
             "data": "id",
         },
+
         {
-        "render": function (data, type, full) {
-            var text = moment(full.updated_at).format('DD/MM/YYYY');
-                return  text;
-            }
+            "data": "good.good_no",
         },
         {
-            "data": "good_no",
-        },
-        {
-            "data": "name",
+            "data": "good.name",
         },
         {
             "data": "amount",
         },
         {
-            "data": "unit",
+            "data": "good.unit.name",
         },
         {
             "data": "user.name",
+        },
+         {
+        "render": function (data, type, full) {
+            var text = moment(full.updated_at).format('DD/MM/YYYY');
+                return  text;
+            }
         },
         {
         "render": function (data, type, full) {
