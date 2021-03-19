@@ -62,7 +62,7 @@ class LoginSSOController extends Controller
 
     public function loginSSO()
     {
-        $router = env("SSO_ROUTE", "");
+        $router = "https://service.eng.rmuti.ac.th/eng-login/login/?id=10&secret=SAWASDEE&msg=";
         return redirect($router);
     }
 
@@ -71,11 +71,11 @@ class LoginSSOController extends Controller
 
         //$router = env("SSO_ROUTE", "");
 
-        $server = env("SSO_SERVER", "");
+        $server = "http://service.eng.rmuti.ac.th/eng-login/xmlrpc/";
 
-        $app_id = env("SSO_APP_ID", "");
+        $app_id = 10;
 
-        $secret = env("SSO_SECRET", "");
+        $secret = "SAWASDEE";
 
         $request = xmlrpc_encode_request("getDecrypt", array($app_id, $secret, $req->attribs));
         $context = stream_context_create(array('http' => array(
@@ -114,7 +114,7 @@ class LoginSSOController extends Controller
                 break;
             case 0:
                 //$this->redirectTo = '/home';
-                return redirect(route('admin'));
+                return redirect(route('user'));
                 break;
             default:
                 //$this->redirectTo = '/login';

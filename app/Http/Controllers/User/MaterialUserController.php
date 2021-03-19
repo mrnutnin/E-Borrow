@@ -19,9 +19,16 @@ class MaterialUserController extends Controller
 
     public function showMaterials()
     {
-        return datatables()->of(
-            Material::query()->with('unit', 'type')->orderBy('updated_at', 'desc')
-        )->toJson();
+
+        if (Auth::user()->type == 'Students') {
+            return datatables()->of(
+                Material::query()->with('unit', 'type')->where('type_id', 1)->orderBy('updated_at', 'desc')
+            )->toJson();
+        } else {
+            return datatables()->of(
+                Material::query()->with('unit', 'type')->orderBy('updated_at', 'desc')
+            )->toJson();
+        }
     }
 
     public function orderMaterial(Request $req)
@@ -62,7 +69,6 @@ class MaterialUserController extends Controller
 
         DB::commit();
         return $data;
-
     }
 
     public function history()
@@ -70,14 +76,13 @@ class MaterialUserController extends Controller
         return view('user.materials.history');
     }
 
-    public function showHistory(){
+    public function showHistory()
+    {
 
         $user = Auth::user();
 
         return datatables()->of(
             BorrowMaterial::query()->with('material.type', 'material.unit')->where('user_id', $user->id)->orderBy('id', 'asc')
         )->toJson();
-
     }
-
 }

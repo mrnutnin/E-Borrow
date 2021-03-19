@@ -15,7 +15,7 @@
                     </span>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
                         <li>
-                            
+
                             <a href="{{ route('logout') }}"
                             onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();">Logout
@@ -72,7 +72,7 @@
                     </li>
                 </ul>
             </li>
-
+            @if(Auth::user()->type !== 'Students' || Auth::user()->is_admin == 1)
             <li class="{{ route::is('goods.*') ? 'active' : '' }}">
                 <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">-- ครุภัณฑ์ --</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
@@ -84,7 +84,7 @@
                     </li>
                 </ul>
             </li>
-
+            @endif
 
         </ul>
 
