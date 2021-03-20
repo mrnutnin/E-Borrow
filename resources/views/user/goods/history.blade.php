@@ -25,7 +25,7 @@
                     <div class="pull-right">
 
                     </div>
-                    <h3>ประวัติการเบิก - คืน วัสดุ</h3>
+                    <h3>ประวัติการเบิก - คืน ครุภัณฑ์</h3>
                 </div>
 
                 <div class="ibox-content">

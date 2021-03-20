@@ -30,13 +30,13 @@
                 <a href="{{ url('/home') }}"><i class="fa fa-th-large"></i> <span class="nav-label">Main Page</span> </a>
             </li>
             <li class="{{ route::is('manage-goods.*') ? 'active' : '' }}">
-                <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">จัดการครุภัณฑ์</span> <span class="fa arrow"></span></a>
+                <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">จัดการครุภัณฑ์</span> <span class="label label-warning pull-right numGood">  <span></a>
                 <ul class="nav nav-second-level">
                     <li class="{{ route::is('manage-goods.index') ? 'active' : '' }}">
                         <a href="{{ route('manage-goods.index') }}">จัดการรายการครุภัณฑ์</a>
                     </li>
                     <li class="{{ route::is('manage-goods.approve') ? 'active' : '' }}">
-                        <a href="{{ route('manage-goods.approve') }}">อนุมัติ เบิก-คืน ครุภัณฑ์</a>
+                        <a href="{{ route('manage-goods.approve') }}">อนุมัติ เบิก-คืน ครุภัณฑ์ <span class="label label-warning pull-right numGood">  <span></a>
                     </li>
                     <li class="{{ route::is('manage-goods.history') ? 'active' : '' }}">
                         <a href="{{ route('manage-goods.history') }}">ประวัติการ เบิก-คืน ครุภัณฑ์</a>
@@ -45,13 +45,13 @@
             </li>
 
             <li class="{{ route::is('manage-materials.*') ? 'active' : '' }}">
-                <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">จัดการวัสดุ</span> <span class="fa arrow"></span></a>
+                <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">จัดการวัสดุ</span> <span class="label label-warning pull-right numMat"> </span> </a>
                 <ul class="nav nav-second-level">
                     <li class="{{ route::is('manage-materials.index') ? 'active' : '' }}">
                         <a href="{{ route('manage-materials.index') }}">จัดการรายการวัสดุ</a>
                     </li>
                     <li class="{{ route::is('manage-materials.approve') ? 'active' : '' }}">
-                        <a href="{{ route('manage-materials.approve') }}">อนุมัติ เบิก-คืน วัสดุ</a>
+                        <a href="{{ route('manage-materials.approve') }}">อนุมัติ เบิก-คืน วัสดุ  <span class="label label-warning pull-right numMat">  <span></a>
                     </li>
                     <li class="{{ route::is('manage-materials.history') ? 'active' : '' }}">
                         <a href="{{ route('manage-materials.history') }}">ประวัติการ เบิก-คืน วัสดุ</a>

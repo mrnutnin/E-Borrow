@@ -107,6 +107,44 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js" ></script>
 
+<script>
+ $( document ).ready(function() {
+     countGoodApprove();
+     countMatApprove();
+
+});
+
+
+function countGoodApprove(){
+
+      $.post("/countGoodApprove", data = {
+            _token: '{{ csrf_token() }}',
+         },
+            function (res) {
+                console.log(res);
+                $('.numGood').text(res);
+            },
+        );
+
+
+
+}
+
+
+function countMatApprove(){
+
+      $.post("/countMatApprove", data = {
+            _token: '{{ csrf_token() }}',
+         },
+            function (res) {
+                console.log(res);
+                $('.numMat').text(res);
+            },
+        );
+}
+
+</script>
+
 @section('script')
 
 

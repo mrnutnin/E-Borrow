@@ -36,7 +36,7 @@
                             <i class="fa fa-plus"></i> สร้างรายการเบิกวัสดุ
                         </button> --}}
                     </div>
-                    <h3>รายการวัสดุ</h3>
+                    <h3>รายการครุภัณฑ์</h3>
                 </div>
 
                 <div class="ibox-content">
@@ -44,7 +44,7 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>ชื่อวัสดุ</th>
+                                <th>ชื่อครุภัณฑ์</th>
                                 <th>จำนวนคงเหลือ</th>
                                 <th>หน่วยนับ</th>
                                 <th>สถานที่จัดเก็บ</th>
@@ -71,7 +71,7 @@
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
-          <h5 class="modal-title" id="exampleModalLabel">รายการเบิกวัสดุ</h5>
+          <h5 class="modal-title" id="exampleModalLabel">รายการเบิกครุภัณฑ์</h5>
 
         </div>
         <div class="modal-body">

@@ -25,7 +25,7 @@
                     <div class="pull-right">
 
                     </div>
-                    <h3>ประวัติการเบิก - คืน วัสดุ</h3>
+                    <h3>อนุมัติการเบิก - คืน วัสดุ</h3>
                 </div>
 
                 <div class="ibox-content">
@@ -190,6 +190,8 @@ function updateStatus(id,status){
                     function (res) {
                         swal.fire(res.title, res.msg, res.status);
                         approve_list_table.ajax.reload();
+                         countMatApprove();
+
                     },
                 );
 
