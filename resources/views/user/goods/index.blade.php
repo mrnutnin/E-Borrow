@@ -262,7 +262,7 @@ $("#good_list_table").ready(function () {
     'columnDefs': [
         {
             "targets": [0, 1, 2, 3, 4, 5, 6],
-            "className": "text-center",
+            "className": "",
         },
     ],
     "columns": [{

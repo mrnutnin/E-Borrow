@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 {{-- <html lang="th"> --}}
 <head>
-     {{-- <meta http-equiv=”Content-Language” content=”th” /> --}}
+    {{-- <meta http-equiv=”Content-Language” content=”th” /> --}}
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     {{-- <meta charset="utf-8"> --}}
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,19 +10,40 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-
     <title>exeport-excel</title>
     <style>
+          @font-face {
+                font-family: 'THSarabunNew';
+                font-style: normal;
+                font-weight: normal;
+                src: url("{{ public_path('fonts/THSarabunNew.ttf') }}") format('truetype');
+            }
+            @font-face {
+                font-family: 'THSarabunNew';
+                font-style: normal;
+                font-weight: bold;
+                src: url("{{ public_path('fonts/THSarabunNew Bold.ttf') }}") format('truetype');
+            }
+            @font-face {
+                font-family: 'THSarabunNew';
+                font-style: italic;
+                font-weight: normal;
+                src: url("{{ public_path('fonts/THSarabunNew Italic.ttf') }}") format('truetype');
+            }
+            @font-face {
+                font-family: 'THSarabunNew';
+                font-style: italic;
+                font-weight: bold;
+                src: url("{{ public_path('fonts/THSarabunNew BoldItalic.ttf') }}") format('truetype');
+            }
 
-
-        /* body {
-            font-family: 'Prompt', sans-serif;
-            font-size: 10px;
-        } */
-
+        body {
+            font-family: "THSarabunNew";
+        }
         table {
             border-collapse: collapse;
             width: 100%;
+
         }
 
 
@@ -45,35 +66,12 @@
             text-align: center;
         }
 
-         @font-face {
-          font-family: 'THSarabunNew';
-          font-style: normal;
-          font-weight: normal;
-          src: url("{{ public_path('fonts/THSarabunNew.ttf') }}") format('truetype');
-    }
-    @font-face {
-          font-family: 'THSarabunNew';
-          font-style: normal;
-          font-weight: bold;
-          src: url("{{ public_path('fonts/THSarabunNew Bold.ttf') }}") format('truetype');
-    }
-    @font-face {
-          font-family: 'THSarabunNew';
-          font-style: italic;
-          font-weight: normal;
-          src: url("{{ public_path('fonts/THSarabunNew Italic.ttf') }}") format('truetype');
-    }
-    @font-face {
-          font-family: 'THSarabunNew';
-          font-style: italic;
-          font-weight: bold;
-          src: url("{{ public_path('fonts/THSarabunNew BoldItalic.ttf') }}") format('truetype');
-    }
+
+
 
 
     </style>
 </head>
-
 <body>
 
     <div class="container">
@@ -86,7 +84,7 @@
                             <th style="border: none;" colspan="13"> {{ $bigData['thead']['text']}}  </th>
                         </tr>
                         <tr style="text-algin:center;">
-                            <th style="border: none;" colspan="13">สาขาวิชาวิศวะกรรมคอมพิวเตอร์ คณะวิศวกรรมศาสตร์ มหาวิทยาลัยเทคโนโลยีราชมงตลอีสาน วิทยาเขตขอนแก่น</th>
+                            <th style="border: none;" colspan="13">สาขาวิชาวิศวกรรมคอมพิวเตอร์ คณะวิศวกรรมศาสตร์ มหาวิทยาลัยเทคโนโลยีราชมงตลอีสาน วิทยาเขตขอนแก่น</th>
                         </tr>
                         {{-- @if($bigData['thead']['text'] != '')
                         <tr style="text-algin:center;">

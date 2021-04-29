@@ -9,12 +9,14 @@ use App\Unit;
 use App\ReceiptGood;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 class GoodAdminController extends Controller
 {
     public function index(){
+
         $departments = Department::all();
         $units = Unit::all();
         $goods = Good::with('unit', 'department')->get();
@@ -139,6 +141,7 @@ class GoodAdminController extends Controller
     public function approveBorrow(Request $req){
         $id = $req->id;
         $status = $req->status;
+        $text = $req->text;
 
         if($status == 1){
             $borrowGood = BorrowGood::find($id);
@@ -151,6 +154,7 @@ class GoodAdminController extends Controller
             $borrowGood = BorrowGood::find($id);
             $borrowGood->status = $status;
             $borrowGood->approve_date = Carbon::now();
+            $borrowGood->note = $text;
             $borrowGood->save();
 
             $good = Good::find($borrowGood->good_id);

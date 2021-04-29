@@ -27,7 +27,7 @@
                 </div>
             </li>
             <li class="">
-                <a href="{{ url('/home') }}"><i class="fa fa-th-large"></i> <span class="nav-label">Main Page</span> </a>
+                <a href="{{ url('/admin') }}"><i class="fa fa-th-large"></i> <span class="nav-label">Main Page</span> </a>
             </li>
             <li class="{{ route::is('manage-goods.*') ? 'active' : '' }}">
                 <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">จัดการครุภัณฑ์</span> <span class="label label-warning pull-right numGood">  <span></a>
@@ -104,8 +104,11 @@
             <li class="{{ route::is('reports.*') ? 'active' : '' }}">
                 <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">รายงาน</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
-                    <li class="{{ route::is('reports.index') ? 'active' : '' }}">
-                        <a href="{{ route('reports.index') }}">รายงาน</a>
+                    <li class="{{ route::is('reports.goods.index') ? 'active' : '' }}">
+                        <a href="{{ route('reports.goods.index') }}">รายงานครุภัณฑ์</a>
+                    </li>
+                     <li class="{{ route::is('reports.mats.index') ? 'active' : '' }}">
+                        <a href="{{ route('reports.mats.index') }}">รายงานวัสดุ</a>
                     </li>
                 </ul>
             </li>

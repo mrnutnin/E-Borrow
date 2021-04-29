@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    
+
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -57,7 +57,7 @@
 
             </div>
             <span class="pull-right">
-                <a href=" {{ route('reports.index')}}" class="btn btn-info" > ย้อนกลับ </a>
+                <a href=" {{ route('reports.goods.index')}}" class="btn btn-info" > ย้อนกลับ </a>
             </span>
             <br><br><br>
 
@@ -67,7 +67,7 @@
                         <th style="border: none;" colspan="13">รายการครุภัณฑ์ ประจำปีงบประมาณ  {{$bigData['thead']['year'] }}</th>
                     </tr>
                     <tr style="text-algin:center;">
-                        <th style="border: none;" colspan="13">สาขาวิชาวิศวะกรรมคอมพิวเตอร์ มหาวิทยาลัยเทคโนโลยีราชมงตลอีสาน วิทยาเขตขอนแก่น</th>
+                        <th style="border: none;" colspan="13">สาขาวิชาวิศวกรรมคอมพิวเตอร์ มหาวิทยาลัยเทคโนโลยีราชมงตลอีสาน วิทยาเขตขอนแก่น</th>
                     </tr>
                     @if($bigData['thead']['text'] != '')
                     <tr style="text-algin:center;">

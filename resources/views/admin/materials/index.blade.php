@@ -25,7 +25,7 @@
                             <tr >
 
                                 <th>ID</th>
-                                <th>เลขที่บิล</th>
+                                <th>รหัสวัสดุ</th>
                                 <th>ชื่อวัสดุ</th>
                                 <th>ประเภทวัสดุ</th>
                                 <th>ราคาต่อหน่วย</th>
@@ -199,7 +199,7 @@ $("#item_list_table").ready(function () {
         'columnDefs': [
             {
                 "targets": [0, 1, 2, 3, 4, 5, 6, 7,8],
-                "className": "text-center",
+                "className": "",
             },
         ],
         "columns": [{

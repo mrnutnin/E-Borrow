@@ -99,13 +99,20 @@ Route::group(['middleware' => ['admin']], function(){
 
     //Report
     Route::get('/report', 'Admin\ReportController@index')->name('reports.index');
+    Route::get('/report/good', 'Admin\ReportController@indexGood')->name('reports.goods.index');
+    Route::get('/report/material', 'Admin\ReportController@indexMaterial')->name('reports.mats.index');
     Route::get('/report/show-good-report', 'Admin\ReportController@showGoodReport')->name('reports.goods.show');
     Route::post('/report/export-good-excel', 'Admin\ReportController@exportGoodExcel')->name('reports.goods.export');
-    Route::get('/report/show-good-pdf', 'Admin\ReportController@exportGoodPDF')->name('reports.goods.pdf.export');
+    Route::get('/report/show-good-report2', 'Admin\ReportController@showGoodReport2')->name('reports.goods.show2');
+    Route::post('/report/export-good-excel2', 'Admin\ReportController@exportGoodExcel2')->name('reports.goods.export2');
+    // Route::get('/report/show-good-pdf', 'Admin\ReportController@exportGoodPDF')->name('reports.goods.pdf.export');
 
 
     Route::get('/report/show-mat-report', 'Admin\ReportController@showMatReport')->name('reports.mats.show');
     Route::post('/report/export-mat-excel', 'Admin\ReportController@exportMatExcel')->name('reports.mats.export');
+    Route::get('/report/show-mat-report2', 'Admin\ReportController@showMatReport2')->name('reports.mats.show2');
+    Route::post('/report/export-mat-excel2', 'Admin\ReportController@exportMatExcel2')->name('reports.mats.export2');
+    // Route::get('/report/show-mat-pdf', 'Admin\ReportController@exportMatPDF')->name('reports.mats.pdf.export');
 
 
 });

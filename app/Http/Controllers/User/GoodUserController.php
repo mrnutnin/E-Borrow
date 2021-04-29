@@ -13,6 +13,7 @@ class GoodUserController extends Controller
 {
     public function index()
     {
+
         return view('user.goods.index');
     }
 

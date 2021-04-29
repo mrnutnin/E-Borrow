@@ -22,6 +22,6 @@ class MatsExport implements FromView
 
     public function view(): View
     {
-        return view('admin.reports.mats.export', ['bigData' => $this->bigData ]);
+        return view('admin.reports.mats.export2', ['bigData' => $this->bigData ]);
     }
 }

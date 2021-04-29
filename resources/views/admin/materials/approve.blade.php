@@ -55,6 +55,27 @@
         </div>
     </div>
 
+    <!-- Modal -->
+<div class="modal fade" id="notemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h3 class="modal-title" id="exampleModalLabel">เหตุผลที่ไม่อนุมัติ</h3>
+        </div>
+        <div class="modal-body text-center" >
+            <span style="font-size: 150%" class="notepreview"></span>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 @endsection
 
 @section('script')
@@ -83,7 +104,7 @@ $("#approve_list_table").ready(function () {
     'columnDefs': [
         {
             "targets": [0, 1, 2, 3, 4, 5, 6, 7, 8],
-            "className": "text-center",
+            "className": "",
         },
     ],
     "columns": [
@@ -126,7 +147,7 @@ $("#approve_list_table").ready(function () {
         "render": function (data, type, full) {
             var text = '';
                 if(full.status == 0){
-                    text = '<span class="badge badge-secondary">รอดำเนินการ</span>';
+                    text = '<span class="badge badge-warning">รอดำเนินการ</span>';
                 }else if (full.status == 1){
                     text = '<span class="badge badge-warning">ยังไม่คืน</span>';
                 }else if (full.status == 2){
@@ -135,7 +156,7 @@ $("#approve_list_table").ready(function () {
                     text = '<span class="badge badge-primary">คืนแล้ว</span>';
                 }
                 if(full.status == 1 && full.type == 'สิ้นเปลือง' ){
-                    text = '<span class="badge badge-secondary">ไม่ต้องคืน</span>';
+                    text = '<span class="badge badge-success">ไม่ต้องคืน</span>';
                 }
 
                 return  text;
@@ -151,7 +172,7 @@ $("#approve_list_table").ready(function () {
                         <button class="btn btn-danger btn-xs" onclick="updateStatus(${full.id},2)"><i class="ri-close-circle-fill"></i> ไม่อนุมัติ </button>
                         `;
             }else if (full.status == 2){
-                text = `<span class="badge badge-danger">${moment(full.approve_date).format('DD MMMM YYYY')}</span>`;
+                text = `<span class="badge badge-danger" onclick="popNote('${full.note}')">${moment(full.approve_date).format('DD MMMM YYYY')}</span>`;
             }else if (full.status == 3){
                 text = `<span class="badge badge-primary">${moment(full.return_date).format('DD MMMM YYYY')}</span>`;
             }
@@ -170,34 +191,95 @@ $("#approve_list_table").ready(function () {
 
 
 function updateStatus(id,status){
-    Swal.fire({
-            title: 'คุณมั่นใจหรือไม่ ?',
-            text: "คุณมั่นใจที่จะดำเนินการต่อไปหรือไม่",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#7A7978',
-            confirmButtonText: 'ตกลง',
-            cancelButtonText: 'ยกเลิก',
 
-        }).then((result) => {
-            if (result.value) {
-                $.post("/manage-materials/approve-borrow", data = {
-                        _token: '{{ csrf_token() }}',
-                        id: id,
-                        status: status,
-                    },
-                    function (res) {
-                        swal.fire(res.title, res.msg, res.status);
-                        approve_list_table.ajax.reload();
-                         countMatApprove();
+        if(status == 2){
+            var text = ''
 
-                    },
-                );
+            Swal.fire({
+                title: "ไม่อนุมัติ!",
+                text: "กรุณากรอกเหตุผลที่ไม่อนุมัติ:",
+                input: 'text',
+                showCancelButton: true
+            }).then((result) => {
+                if (result.value) {
+                    text = result.value;
+                    Swal.fire({
+                        title: 'คุณมั่นใจหรือไม่ ?',
+                        text: "คุณมั่นใจที่จะดำเนินการต่อไปหรือไม่",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#7A7978',
+                        confirmButtonText: 'ตกลง',
+                        cancelButtonText: 'ยกเลิก',
 
-            }
-        });
+                    }).then((result) => {
+                        if (result.value) {
+                            $.post("/manage-materials/approve-borrow", data = {
+                                    _token: '{{ csrf_token() }}',
+                                    id: id,
+                                    status: status,
+                                    text: text,
+                                },
+                                function (res) {
+                                    swal.fire(res.title, res.msg, res.status);
+                                    approve_list_table.ajax.reload();
+                                    countMatApprove();
+                                },
+                            );
 
+                        }
+                    });
+                }
+            });
+
+        }else{
+            Swal.fire({
+                title: 'คุณมั่นใจหรือไม่ ?',
+                text: "คุณมั่นใจที่จะดำเนินการต่อไปหรือไม่",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#7A7978',
+                confirmButtonText: 'ตกลง',
+                cancelButtonText: 'ยกเลิก',
+
+            }).then((result) => {
+                if (result.value) {
+                    $.post("/manage-materials/approve-borrow", data = {
+                            _token: '{{ csrf_token() }}',
+                            id: id,
+                            status: status,
+                        },
+                        function (res) {
+                            swal.fire(res.title, res.msg, res.status);
+                            approve_list_table.ajax.reload();
+                            countMatApprove();
+                        },
+                    );
+
+                }
+            });
+        }
+
+
+
+
+}
+
+function popNote(text){
+    console.log('OK');
+    var note = 'ไม่พบข้อมูล'
+    if(text  != null || text != undefined || text != '' || text.leght != 0){
+        note = text;
+        $('.notepreview').text(note);
+    }else{
+        note = 'ไม่พบข้อมูล'
+         $('.notepreview').text(note);
+    }
+    console.log(note)
+
+    $('#notemodal').modal('show');
 }
 </script>
 @stop

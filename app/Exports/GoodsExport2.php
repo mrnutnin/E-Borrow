@@ -7,7 +7,7 @@ use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
 
 
-class GoodsExport2 implements FromView
+class GoodsExport implements FromView
 {
 
     use Exportable;
@@ -22,6 +22,6 @@ class GoodsExport2 implements FromView
 
     public function view(): View
     {
-        return view('admin.reports.goods.export2', ['bigData' => $this->bigData ]);
+        return view('admin.reports.goods.export', ['bigData' => $this->bigData ]);
     }
 }

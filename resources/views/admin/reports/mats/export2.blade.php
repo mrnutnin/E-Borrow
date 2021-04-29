@@ -79,25 +79,24 @@
         <div class="row">
             <div class="center">
 
-            <table class="display nowrap" style="width:100%" id="simple_table">
+               <table class="display nowrap" style="width:100%" id="simple_table">
                 <thead>
                     <tr style="text-algin:center; ">
-                        <th style="border: none;" colspan="13">รายการครุภัณฑ์ ประจำปีงบประมาณ  {{$bigData['thead']['year'] }}</th>
+                        <th style="border: none;" colspan="13">รายการวัสดุ ประจำปีงบประมาณ  {{$bigData['thead']['year'] }}</th>
                     </tr>
                     <tr style="text-algin:center;">
                         <th style="border: none;" colspan="13">สาขาวิชาวิศวกรรมคอมพิวเตอร์ มหาวิทยาลัยเทคโนโลยีราชมงตลอีสาน วิทยาเขตขอนแก่น</th>
                     </tr>
-                    @if($bigData['thead']['text'] !='')
+                    @if($bigData['thead']['text'] != '')
                     <tr style="text-algin:center;">
                         <th style="border: none;" colspan="13">{{$bigData['thead']['text'] }}</th>
                     </tr>
                     @endif
-
-                    <tr>
+                    <tr style="text-algin:center;">
                         <th rowspan="2">ที่</th>
-                        <th rowspan="2">หน่วยงาน</th>
-                        <th rowspan="2">วันที่ซื้อ</th>
-                        <th rowspan="2">หมายเลขครุภัณฑ์</th>
+                        {{-- <th rowspan="2">หน่วยงาน</th> --}}
+                        {{-- <th rowspan="2">วันที่ซื้อ</th> --}}
+                        <th rowspan="2">รหัสวัสดุ</th>
                         <th rowspan="2">รายการ</th>
                         <th rowspan="2">จำนวน</th>
                         <th rowspan="2">หน่วยนับ</th>
@@ -117,29 +116,24 @@
                     @foreach ($bigData['tbodies'] as $row)
                     <tr>
                         <td> {{ $bigData['thead']['i'] ++ }} </td>
-                        <td> {{ $row['department']['name'] }} </td>
-                        <td style="text-align: center;"> {{ date("d/m/Y", strtotime($row['buy_date']))}} </td>
-                        <td> {{ $row['good_no'] }} </td>
+                        {{-- <td> {{ $row['department']['name'] }} </td> --}}
+                        {{-- <td style="text-align: center;"> {{ date("d/m/Y", strtotime($row['buy_date']))}} </td> --}}
+                        <td> {{ $row['bill_code'] }} </td>
                         <td> {{ $row['name'] }} </td>
                         <td style="text-align: center;"> {{ $row['amount'] }} </td>
                         <td style="text-align: center;"> {{ $row['unit']['name'] }} </td>
                         <td style="text-align: right;"> {{ number_format($row['price_unit'], 2) }} </td>
                         <td style="text-align: right;"> {{ number_format($row['price_unit'] *  $row['amount'], 2) }} </td>
-                        @if( $row['status'] == 1 )
-                        <td style="text-align: center;"> / </td>
-                        <td>  </td>
-                        @else
-                        <td>  </td>
-                        <td style="text-align: center;"> / </td>
-                        @endif
-                        <td> {{ $row['place'] }} </td>
-                        <td> {{ $row['remark'] }} </td>
+                        <td style="text-align: center;">  </td>
+                        <td style="text-align: center;">  </td>
+                        <td></td>
+                        <td> </td>
                     </tr>
                     @endforeach
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th colspan="7"></th>
+                        <th colspan="5"></th>
                         <th>รวม</th>
                         <th style="text-align: right;"> {{ number_format($bigData['tfoot']['total'], 2) }}</th>
                         <th></th>
@@ -149,7 +143,6 @@
                     </tr>
                 </tfoot>
             </table>
-
         </div>
     </div>
 </body>

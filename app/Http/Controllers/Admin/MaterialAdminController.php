@@ -63,7 +63,7 @@ class MaterialAdminController extends Controller
 
             return $data;
         }
-        
+
         DB::beginTransaction();
 
         $material = Material::find($req->id);
@@ -132,8 +132,8 @@ class MaterialAdminController extends Controller
     public function approveBorrow(Request $req){
         $id = $req->id;
         $status = $req->status;
-
-        // dd($status);
+        $text = $req->text;
+        //  dd($req->all());
         if($status == 1){
             $borrowMaterial = BorrowMaterial::find($id);
             $borrowMaterial->status = $status;
@@ -145,6 +145,7 @@ class MaterialAdminController extends Controller
             $borrowMaterial = BorrowMaterial::find($id);
             $borrowMaterial->status = $status;
             $borrowMaterial->approve_date = Carbon::now();
+            $borrowMaterial->note = $text;
             $borrowMaterial->save();
 
             $material = Material::find($borrowMaterial->material_id);

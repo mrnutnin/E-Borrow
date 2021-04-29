@@ -53,6 +53,27 @@
         </div>
     </div>
 
+        <!-- Modal -->
+<div class="modal fade" id="notemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h3 class="modal-title" id="exampleModalLabel">เหตุผลที่ไม่อนุมัติ</h3>
+        </div>
+        <div class="modal-body text-center" >
+            <span style="font-size: 150%" class="notepreview"></span>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 @endsection
 
 @section('script')
@@ -79,7 +100,7 @@ $("#history_list_table").ready(function () {
     'columnDefs': [
         {
             "targets": [0, 1, 2, 3, 4, 5, 6, 7],
-            "className": "text-center",
+            "className": "",
         },
     ],
     "columns": [
@@ -109,7 +130,7 @@ $("#history_list_table").ready(function () {
             "render": function (data, type, full) {
             var text = '';
                 if(full.status == 0){
-                    text = '<span class="badge badge-secondary">รอดำเนินการ</span>';
+                    text = '<span class="badge badge-warning">รอดำเนินการ</span>';
                 }else if (full.status == 1){
                     text = '<span class="badge badge-warning">ยังไม่คืน</span>';
                 }else if (full.status == 2){
@@ -127,7 +148,7 @@ $("#history_list_table").ready(function () {
                 if(full.status == 3){
                     text = `<span class="badge badge-primary">${moment(full.return_date).format('D/M/YYYY')}</span>`;
                 }else if (full.status == 2){
-                    text = `<span class="badge badge-danger">${moment(full.approve_date).format('D/M/YYYY')}</span>`;
+                    text = `<span class="badge badge-danger" onclick="popNote('${full.note}')">${moment(full.approve_date).format('D/M/YYYY')}</span>`;
                 }else if(full.status == 1){
                     text = `<span class="badge badge-warning">${moment(full.approve_date).format('D/M/YYYY')}</span>`;
                 }
@@ -138,6 +159,15 @@ $("#history_list_table").ready(function () {
     ],
     });
 });
+
+function popNote(text){
+    console.log('OK');
+    if(text == null){
+        text = '';
+    }
+    $('.notepreview').text(text);
+    $('#notemodal').modal('show');
+}
 </script>
 @stop
 
