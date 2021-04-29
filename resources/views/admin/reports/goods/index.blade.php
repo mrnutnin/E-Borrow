@@ -82,11 +82,11 @@
                             <br>
 
                             <label for="">รูปแบบรายการ : </label>
-                            <select name="select" id="select" form="matExport" class="form-control" required>
-                                @foreach ($types as $type)
-                                    <option value="{{ $type->id }}"> {{ $type->name }}</option>
-                                @endforeach
-                            </select>
+                              <select name="select" id="select" form="goodExport" class="form-control" required>
+                                   <option value="1">ทั้งหมด</option>
+                                   <option value="2">มูลค่าต่ำกว่า 5,000 บาท</option>
+                                   <option value="3">มูลค่ามากกว่า 5,000 บาท</option>
+                               </select>
                             <br>
                         </form>
                         </div>
