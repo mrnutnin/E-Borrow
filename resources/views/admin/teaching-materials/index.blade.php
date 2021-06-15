@@ -233,6 +233,9 @@ $("#item_list_table").ready(function () {
         "columns": [{
                 "data": "id",
             },
+              {
+                "data": "bill_no",
+            },
                 {
                 "data": "id",
                 "render": function (data, type, full) {
@@ -243,9 +246,7 @@ $("#item_list_table").ready(function () {
                     return text;
                 }
             },
-            {
-                "data": "bill_no",
-            },
+
             {
                 "data": "name",
             },

@@ -26,7 +26,7 @@ class TeachingMaterialAdminController extends Controller
 
     public function showMaterials(){
         return datatables()->of(
-            Material::query()->with('unit', 'type')->where('type_id', 1)->orderBy('updated_at', 'desc')
+            Material::query()->with('unit', 'type','shop')->where('type_id', 1)->orderBy('updated_at', 'desc')
         )->toJson();
     }
 
