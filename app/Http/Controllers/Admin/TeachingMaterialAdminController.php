@@ -97,6 +97,7 @@ class TeachingMaterialAdminController extends Controller
         DB::beginTransaction();
         $material = Material::find($req->id);
         $material->amount += $req->amount;
+        $material->ready_to_use += $req->amount;
 
         $receiptMaterial = new ReceiptMaterial;
         $receiptMaterial->material_id =  $req->id;
