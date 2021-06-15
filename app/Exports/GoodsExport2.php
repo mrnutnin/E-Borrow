@@ -22,6 +22,6 @@ class GoodsExport implements FromView
 
     public function view(): View
     {
-        return view('admin.reports.goods.export', ['bigData' => $this->bigData ]);
+        return view('admin.reports.goods.export2', ['bigData' => $this->bigData ]);
     }
 }

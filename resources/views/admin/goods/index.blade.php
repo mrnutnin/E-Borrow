@@ -104,12 +104,27 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <label><span style="color:red">*</span>จำนวน</label>
+                            <label><span style="color:red">*</span>จำนวนทั้งหมด</label>
                             <div class="form-group">
-                                    <input type="number" class="form-control" maxlength="8" id="amount" name="amount" required>
+                                    <input type="number" class="form-control" maxlength="8" id="amount" name="amount" required readonly>
                             </div>
                         </div>
                     </div>
+
+                    <div class="row">
+                            <div class="col-md-6">
+                                <label><span style="color:red">*</span>จำนวนที่ใช้ได้</label>
+                                <div class="form-group">
+                                    <input type="number" step="0.01" class="form-control" maxlength="8" id="ready_to_use" name="ready_to_use" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label><span style="color:red">*</span>จำนวนที่ชำรุด</label>
+                                <div class="form-group">
+                                        <input type="number" class="form-control" maxlength="8" id="defective" name="defective" required>
+                                </div>
+                            </div>
+                        </div>
 
                     <div class="row">
                         <div class="col-md-6">
@@ -356,6 +371,11 @@ function editGood(good) {
     var total_price = $('#total_price').val(good.total_price);
     var place = $('#place').val(good.place);
     var status = $('#status').val(good.status);
+
+
+    var ready_to_use = $('#ready_to_use').val(good.ready_to_use);
+    var defective = $('#defective').val(good.defective);
+
     $('#addItemModal').modal('show');
     console.log('ok');
 }
@@ -411,6 +431,23 @@ Swal.fire({
     }
 });
 }
+
+$('#ready_to_use, #defective').on('change keyup', function() {
+    var ready_to_use = $("#ready_to_use").val();
+    var defective = $("#defective").val();
+    console.log(ready_to_use);
+    console.log(defective);
+    if(ready_to_use && defective){
+        var amount = parseInt(ready_to_use) + parseInt(defective);
+
+        $("#amount").val(amount);
+        console.log('amount : '+amount);
+    }
+    if(ready_to_use == undefined || defective == undefined || ready_to_use == '' || defective == ''){
+        $("#amount").val('');
+        console.log('amount : '+amount);
+    }
+});
 
 
 </script>

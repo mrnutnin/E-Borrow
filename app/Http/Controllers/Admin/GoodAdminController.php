@@ -49,6 +49,9 @@ class GoodAdminController extends Controller
         $good->name = $req->name;
         $good->price_unit = $req->price_unit;
         $good->amount = $req->amount;
+
+        $good->ready_to_use = $req->ready_to_use;
+        $good->defective = $req->defective;
         // $good->total_price = $req->total_price;
         $good->department_id = $req->department;
         $good->unit_id = $req->unit;
@@ -99,10 +102,12 @@ class GoodAdminController extends Controller
         DB::beginTransaction();
         $good = Good::find($req->id);
         $good->amount += $req->amount;
+        $good->ready_to_use += $req->amount;
 
         $receiptGood = new ReceiptGood;
         $receiptGood->good_id =  $req->id;
         $receiptGood->amount = $req->amount;
+
 
         if($good->save() && $receiptGood->save()){
             $data = [

@@ -106,13 +106,15 @@
                         <td style="text-align: center;"> {{ $row['unit']['name'] }} </td>
                         <td style="text-align: right;"> {{ number_format($row['price_unit'], 2) }} </td>
                         <td style="text-align: right;"> {{ number_format($row['price_unit'] *  $row['amount'], 2) }} </td>
-                        @if( $row['status'] == 1 )
-                        <td style="text-align: center;"> / </td>
+                        {{-- @if( $row['status'] == 1 )
+                        <td style="text-align: center;">  </td>
                         <td>  </td>
                         @else
                         <td>  </td>
-                        <td style="text-align: center;"> / </td>
-                        @endif
+                        <td style="text-align: center;">  </td>
+                        @endif --}}
+                        <td style="text-align: center;"> {{ $row['ready_to_use'] }} </td>
+                        <td style="text-align: center;"> {{ $row['defective'] }} </td>
                         <td> {{ $row['place'] }} </td>
                         <td> {{ $row['remark'] }} </td>
                     </tr>

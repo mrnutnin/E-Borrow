@@ -146,7 +146,7 @@ class ReportController extends Controller
             $text1 = 'รายการครุภัณฑ์ที่มีมูลค่ามากกว่า 5,000 บาท';
         }
 
-        $text = 'แบบฟอร์มการตรวจครุภัณฑ์' . $type->name . 'คงเหลือประจำปีงบประมาณ ' . $year . ' ( '. $text1 .')';
+        $text = 'แบบฟอร์มการตรวจครุภัณฑ์' . 'คงเหลือประจำปีงบประมาณ ' . $year . ' ( '. $text1 .')';
 
         $tbodies = [];
         $goodIds = $goods->pluck('id');
