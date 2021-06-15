@@ -96,7 +96,7 @@
                         <th rowspan="2">ที่</th>
                         {{-- <th rowspan="2">หน่วยงาน</th> --}}
                         {{-- <th rowspan="2">วันที่ซื้อ</th> --}}
-                        <th rowspan="2">รหัสวัสดุ</th>
+                        <th rowspan="2">เลขที่บิล</th>
                         <th rowspan="2">รายการ</th>
                         <th rowspan="2">จำนวน</th>
                         <th rowspan="2">หน่วยนับ</th>
