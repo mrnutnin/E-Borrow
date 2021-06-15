@@ -128,7 +128,7 @@
                             <div class="col-md-6">
                                 <label><span style="color:red">*</span>จำนวนทั้งหมด</label>
                                 <div class="form-group">
-                                        <input type="number" class="form-control" maxlength="8" id="amount" name="amount" required>
+                                        <input type="number" class="form-control" maxlength="8" id="amount" name="amount" required readonly>
                                 </div>
                             </div>
                         </div>
@@ -137,13 +137,13 @@
                             <div class="col-md-6">
                                 <label>จำนวนที่ใช้ได้</label>
                                 <div class="form-group">
-                                    <input type="number" step="0.01" class="form-control" maxlength="8" id="ready_to_use" name="ready_to_use" >
+                                    <input type="number" step="0.01" class="form-control" maxlength="8" id="ready_to_use" name="ready_to_use" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <label>จำนวนที่ชำรุด</label>
                                 <div class="form-group">
-                                        <input type="number" class="form-control" maxlength="8" id="defective" name="defective" >
+                                        <input type="number" class="form-control" maxlength="8" id="defective" name="defective" required>
                                 </div>
                             </div>
                         </div>
