@@ -339,7 +339,7 @@ $( "#addMaterialBtn" ).click(function() {
 function editMaterial(material) {
     var id = $('#id').val(material.id);
         $('#shop_').val(material.shop_id);
-    // var bill_no = $('#bill_no').val(material.bill_no);
+    var bill_no = $('#bill_no').val(material.bill_no);
     var name = $('#name').val(material.name);
     var price_unit = $('#price_unit').val(material.price_unit);
     // var amount = $('#amount').val(material.amount).attr('readonly', true);
