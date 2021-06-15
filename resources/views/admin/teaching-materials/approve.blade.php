@@ -25,7 +25,7 @@
                     <div class="pull-right">
 
                     </div>
-                    <h3>อนุมัติการเบิก - คืน วัสดุสำนักงาน</h3>
+                    <h3>อนุมัติการเบิก - คืน วัสดุ</h3>
                 </div>
 
                 <div class="ibox-content">
@@ -38,7 +38,7 @@
                                 <th>รายการ</th>
                                 <th>จำนวน</th>
                                 <th>หน่วย</th>
-                                {{-- <th>ประเภท</th> --}}
+                                <th>ประเภท</th>
                                 <th>ชื่อผู้ยืม</th>
                                 {{-- <th>action</th> --}}
                                 <th>สถานะ</th>
@@ -95,7 +95,7 @@ $("#approve_list_table").ready(function () {
         [0, "desc"]
     ],
     "ajax": {
-        "url": "/manage-materials/show-histories",
+        "url": "/manage-teaching-materials/show-histories",
         "method": "POST",
         "data": {
             "_token": "{{ csrf_token()}}",
@@ -103,7 +103,7 @@ $("#approve_list_table").ready(function () {
     },
     'columnDefs': [
         {
-            "targets": [ 6, 7],
+            "targets": [6, 7],
             "className": "text-center",
         },
     ],
@@ -215,7 +215,7 @@ function updateStatus(id,status){
 
                     }).then((result) => {
                         if (result.value) {
-                            $.post("/manage-materials/approve-borrow", data = {
+                            $.post("/manage-teaching-materials/approve-borrow", data = {
                                     _token: '{{ csrf_token() }}',
                                     id: id,
                                     status: status,
@@ -246,7 +246,7 @@ function updateStatus(id,status){
 
             }).then((result) => {
                 if (result.value) {
-                    $.post("/manage-materials/approve-borrow", data = {
+                    $.post("/manage-teaching-materials/approve-borrow", data = {
                             _token: '{{ csrf_token() }}',
                             id: id,
                             status: status,

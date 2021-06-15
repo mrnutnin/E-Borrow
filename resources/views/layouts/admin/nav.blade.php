@@ -45,16 +45,31 @@
             </li>
 
             <li class="{{ route::is('manage-materials.*') ? 'active' : '' }}">
-                <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">จัดการวัสดุ</span> <span class="label label-warning pull-right numMat"> </span> </a>
+                <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">จัดการวัสดุสำนักงาน</span> <span class="label label-warning pull-right numMat"> </span> </a>
                 <ul class="nav nav-second-level">
                     <li class="{{ route::is('manage-materials.index') ? 'active' : '' }}">
                         <a href="{{ route('manage-materials.index') }}">จัดการรายการวัสดุ</a>
                     </li>
                     <li class="{{ route::is('manage-materials.approve') ? 'active' : '' }}">
-                        <a href="{{ route('manage-materials.approve') }}">อนุมัติ เบิก-คืน วัสดุ  <span class="label label-warning pull-right numMat">  <span></a>
+                        <a href="{{ route('manage-materials.approve') }}">อนุมัติ เบิก-คืน วัสดุ <span class="label label-warning pull-right numMat">  <span></a>
                     </li>
                     <li class="{{ route::is('manage-materials.history') ? 'active' : '' }}">
                         <a href="{{ route('manage-materials.history') }}">ประวัติการ เบิก-คืน วัสดุ</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="{{ route::is('manage-teaching-materials.*') ? 'active' : '' }}">
+                <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">จัดการวัสดุฝึกสอน</span> <span class="label label-warning pull-right numTMat"> </span> </a>
+                <ul class="nav nav-second-level">
+                    <li class="{{ route::is('manage-teaching-materials.index') ? 'active' : '' }}">
+                        <a href="{{ route('manage-teaching-materials.index') }}">จัดการรายการวัสดุ</a>
+                    </li>
+                    <li class="{{ route::is('manage-teaching-materials.approve') ? 'active' : '' }}">
+                        <a href="{{ route('manage-teaching-materials.approve') }}">อนุมัติ เบิก-คืน วัสดุ <span class="label label-warning pull-right numTMat">  <span></a>
+                    </li>
+                    <li class="{{ route::is('manage-teaching-materials.history') ? 'active' : '' }}">
+                        <a href="{{ route('manage-teaching-materials.history') }}">ประวัติการ เบิก-คืน วัสดุ</a>
                     </li>
                 </ul>
             </li>
@@ -97,6 +112,9 @@
                     <li class="{{ route::is('generals.manage-types.index') ? 'active' : '' }}">
                         <a href="{{ route('generals.manage-types.index') }}">ตั้งค่าประเภทวัสดุ</a>
                     </li>
+                     <li class="{{ route::is('generals.manage-shops.index') ? 'active' : '' }}">
+                        <a href="{{ route('generals.manage-shops.index') }}">ตั้งค่าร้านค้า</a>
+                    </li>
                 </ul>
             </li>
 
@@ -108,7 +126,11 @@
                         <a href="{{ route('reports.goods.index') }}">รายงานครุภัณฑ์</a>
                     </li>
                      <li class="{{ route::is('reports.mats.index') ? 'active' : '' }}">
-                        <a href="{{ route('reports.mats.index') }}">รายงานวัสดุ</a>
+                        <a href="{{ route('reports.mats.index') }}">รายงานวัสดุสำนักงาน</a>
+                    </li>
+
+                    <li class="{{ route::is('reports.teaching-mats.index') ? 'active' : '' }}">
+                        <a href="{{ route('reports.teaching-mats.index') }}">รายงานวัสดุฝึกสอน</a>
                     </li>
                 </ul>
             </li>

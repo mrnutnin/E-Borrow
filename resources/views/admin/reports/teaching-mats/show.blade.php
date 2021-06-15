@@ -48,7 +48,7 @@
                 <br>
                 <br>
                 <br>
-                <form action="{{ route('reports.mats.export')}}" method="POST">
+                <form action="{{ route('reports.teaching-mats.export')}}" method="POST">
                     @csrf
                     <input type="hidden" name="bigData" value="{{ json_encode($bigData) }}">
                     <button type="submit" class="btn btn-success"><i class="fa fa-download" aria-hidden="true"></i> Export Excel </button>
@@ -56,7 +56,7 @@
 
             </div>
             <span class="pull-right">
-                <a href=" {{ route('reports.mats.index')}}" class="btn btn-info" > ย้อนกลับ </a>
+                <a href=" {{ route('reports.teaching-mats.index')}}" class="btn btn-info" > ย้อนกลับ </a>
             </span>
             <br><br><br>
 

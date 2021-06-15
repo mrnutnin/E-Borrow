@@ -109,9 +109,9 @@
 
 <script>
  $( document ).ready(function() {
-     countGoodApprove();
-     countMatApprove();
-
+    countGoodApprove();
+    countMatApprove();
+    countTeachingMatApprove();
 });
 
 
@@ -139,6 +139,18 @@ function countMatApprove(){
             function (res) {
                 console.log(res);
                 $('.numMat').text(res);
+            },
+        );
+}
+
+function countTeachingMatApprove(){
+
+      $.post("/countTeachingMatApprove", data = {
+            _token: '{{ csrf_token() }}',
+         },
+            function (res) {
+                console.log(res);
+                $('.numTMat').text(res);
             },
         );
 }

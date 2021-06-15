@@ -20,7 +20,7 @@
                             <i class="fa fa-plus"></i> เพิ่ม
                         </button>
                     </div>
-                    <h3>รายการประเภทวัสดุ</h3>
+                    <h3>รายการหน่วยนับ</h3>
                 </div>
                 <div class="ibox-content">
                     <table class="table table-bordered" id="item_list_table" style="width:100%" >
@@ -97,7 +97,7 @@ $("#item_list_table").ready(function () {
             [3, "desc"]
         ],
         "ajax": {
-            "url": "/generals/manage-types/show",
+            "url": "/generals/manage-shops/show",
             "method": "POST",
             "data": {
                 "_token": "{{ csrf_token()}}",
@@ -129,9 +129,8 @@ $("#item_list_table").ready(function () {
                     var obj = JSON.stringify(full);
                     return `
                             <button class="btn btn-warning btn-sm" onclick='editItem(${obj})''> แก้ไข</button>
-
+                            <button class="btn btn-danger btn-sm" onclick="deleteItem(${full.id})"> ลบ</button>
                             `;
-                                                // <button class="btn btn-danger btn-sm" onclick="deleteItem(${full.id})"> ลบ</button>
                 }
             },
         ],
@@ -148,7 +147,7 @@ $('#storeBtn').click(function(){
         $('#addItemModal').modal('hide');
         Swal.fire('ผิดพลาด', 'กรุณากรอกข้อมูล !', 'warning');
     }else{
-        $.post("/generals/manage-types/store", data = {
+        $.post("/generals/manage-shops/store", data = {
                     _token: '{{ csrf_token() }}',
                     name: name,
                     id: id,
@@ -181,7 +180,7 @@ function deleteItem(id) {
         confirmButtonText: 'ตกลง',
     }).then((result) => {
         if (result.value) {
-            $.post("/generals/manage-types/delete", data = {
+            $.post("/generals/manage-shops/delete", data = {
                     _token: '{{ csrf_token() }}',
                     id: id,
                 },

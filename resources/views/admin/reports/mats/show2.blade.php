@@ -99,14 +99,14 @@
                         <td> {{ $bigData['thead']['i'] ++ }} </td>
                         {{-- <td> {{ $row['department']['name'] }} </td> --}}
                         {{-- <td style="text-align: center;"> {{ date("d/m/Y", strtotime($row['buy_date']))}} </td> --}}
-                        <td> {{ $row['bill_code'] }} </td>
+                        <td> {{ $row['bill_no'] }} </td>
                         <td> {{ $row['name'] }} </td>
                         <td style="text-align: center;"> {{ $row['amount'] }} </td>
                         <td style="text-align: center;"> {{ $row['unit']['name'] }} </td>
                         <td style="text-align: right;"> {{ number_format($row['price_unit'], 2) }} </td>
                         <td style="text-align: right;"> {{ number_format($row['price_unit'] *  $row['amount'], 2) }} </td>
-                        <td style="text-align: center;">  </td>
-                        <td style="text-align: center;">  </td>
+                        <td style="text-align: center;"> {{ $row['ready_to_use'] }}</td>
+                        <td style="text-align: center;"> {{ $row['defective'] }}</td>
                         <td> </td>
                         <td> </td>
                     </tr>

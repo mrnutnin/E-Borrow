@@ -25,7 +25,7 @@
                     <div class="pull-right">
 
                     </div>
-                    <h3>ประวัติการเบิก - คืน วัสดุ</h3>
+                    <h3>ประวัติการเบิก - คืน วัสดุ สำนักงาน</h3>
                 </div>
 
                 <div class="ibox-content">
@@ -38,7 +38,7 @@
                                 <th>รายการ</th>
                                 <th>จำนวน</th>
                                 <th>หน่วย</th>
-                                <th>ประเภท</th>
+                                {{-- <th>ประเภท</th> --}}
                                 {{-- <th>action</th> --}}
                                 <th>สถานะ</th>
                                 <th>หมายเหตุ</th>
@@ -100,7 +100,7 @@ $("#history_list_table").ready(function () {
     },
     'columnDefs': [
         {
-            "targets": [0, 1, 2, 3, 4, 5, 6, 7],
+            "targets": [0, 1, 2, 3, 4, 5, 6],
             "className": "",
         },
     ],
@@ -123,9 +123,9 @@ $("#history_list_table").ready(function () {
         {
             "data": "unit",
         },
-        {
-            "data": "type",
-        },
+        // {
+        //     "data": "type",
+        // },
         {
             "render": function (data, type, full) {
             var text = '';

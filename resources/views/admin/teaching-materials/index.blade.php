@@ -13,10 +13,10 @@
                             <i class="fa fa-plus"></i> สร้างบิล
                         </button> --}}
                         <button type="button" id="modal2Btn" class="btn btn-primary">
-                            <i class="fa fa-plus"></i> เพิ่มรายการวัสดุสำนักงาน
+                            <i class="fa fa-plus"></i> เพิ่มรายการวัสดุฝึกสอน
                         </button>
                     </div>
-                    <h3>รายการวัสดุสำนักงาน</h3>
+                    <h3>รายการวัสดุฝึกสอน</h3>
                 </div>
 
                 <div class="ibox-content">
@@ -25,6 +25,7 @@
                             <tr >
 
                                 <th>ID</th>
+
                                 <th>เลขที่บิล</th>
                                 <th>ร้านค้า</th>
                                 <th>ชื่อวัสดุ</th>
@@ -88,11 +89,11 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title" id="myModalLabel">เพิ่มรายการวัสดุสำนักงาน</h4>
+                    <h4 class="modal-title" id="myModalLabel">เพิ่มรายการวัสดุฝึกสอน</h4>
                 </div>
                 <div class="modal-body">
 
-                    <form action="{{ route('manage-materials.store') }}" id="addMaterialForm" method="POST">
+                    <form action="{{ route('manage-teaching-materials.store') }}" id="addMaterialForm" method="POST">
                         @csrf
                         <input type="hidden" class="form-control" id="id" name="id" >
 
@@ -110,7 +111,6 @@
                                 @endforeach
 
                             </select>
-
                         </div>
 
                         <label><span style="color:red">*</span>ชื่อวัสดุ</label>
@@ -128,22 +128,22 @@
                             <div class="col-md-6">
                                 <label><span style="color:red">*</span>จำนวนทั้งหมด</label>
                                 <div class="form-group">
-                                        <input type="number" class="form-control" maxlength="8" id="amount" name="amount" required readonly>
+                                        <input type="number" class="form-control" maxlength="8" id="amount" name="amount" required>
                                 </div>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-md-6">
-                                <label><span style="color:red">*</span>จำนวนที่ใช้ได้</label>
+                                <label>จำนวนที่ใช้ได้</label>
                                 <div class="form-group">
-                                    <input type="number" step="0.01" class="form-control" maxlength="8" id="ready_to_use" name="ready_to_use" required>
+                                    <input type="number" step="0.01" class="form-control" maxlength="8" id="ready_to_use" name="ready_to_use" >
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <label><span style="color:red">*</span>จำนวนที่ชำรุด</label>
+                                <label>จำนวนที่ชำรุด</label>
                                 <div class="form-group">
-                                        <input type="number" class="form-control" maxlength="8" id="defective" name="defective" required>
+                                        <input type="number" class="form-control" maxlength="8" id="defective" name="defective" >
                                 </div>
                             </div>
                         </div>
@@ -218,7 +218,7 @@ $("#item_list_table").ready(function () {
             [5, "asc"]
         ],
         "ajax": {
-            "url": "/manage-materials/show-materials",
+            "url": "/manage-teaching-materials/show-materials",
             "method": "POST",
             "data": {
                 "_token": "{{ csrf_token()}}",
@@ -233,10 +233,7 @@ $("#item_list_table").ready(function () {
         "columns": [{
                 "data": "id",
             },
-            {
-                "data": "bill_no",
-            },
-            {
+                {
                 "data": "id",
                 "render": function (data, type, full) {
                     var text = '';
@@ -247,8 +244,14 @@ $("#item_list_table").ready(function () {
                 }
             },
             {
+                "data": "bill_no",
+            },
+            {
                 "data": "name",
             },
+            // {
+            //     "data": "type.name",
+            // },
             {
                 "render": function (data, type, full) {
                     return full.price_unit.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -315,7 +318,7 @@ function deleteMaterial(id) {
         confirmButtonText: 'ตกลง',
     }).then((result) => {
         if (result.value) {
-            $.post("/manage-materials/delete", data = {
+            $.post("/manage-teaching-materials/delete", data = {
                     _token: '{{ csrf_token() }}',
                     id: id,
                 },
@@ -338,7 +341,6 @@ $( "#addMaterialBtn" ).click(function() {
 
 function editMaterial(material) {
     var id = $('#id').val(material.id);
-        $('#shop_').val(material.shop_id);
     // var bill_no = $('#bill_no').val(material.bill_no);
     var name = $('#name').val(material.name);
     var price_unit = $('#price_unit').val(material.price_unit);
@@ -348,17 +350,15 @@ function editMaterial(material) {
     var total_price = $('#total_price').val(material.amount * material.price_unit);
     // var type = $('#type').val(material.type.id);
     var shop = $('#shop').val(material.shop_id);
-
     var ready_to_use = $('#ready_to_use').val(material.ready_to_use);
     var defective = $('#defective').val(material.defective);
-
     $('#modal2').modal('show');
     console.log('ok');
 }
 
 function infoMaterial(material) {
+    $("#shop").val(material.shop_id);
     console.log(material);
-    $('#shop_').val(material.shop_id);
     $('#id_').text(material.id);
     $('#bill_no_').text(material.bill_no);
     $('#name_').text(material.name);;
@@ -369,6 +369,7 @@ function infoMaterial(material) {
     // $('#type_').text(material.type.name);
     $('#updated_at_').text(material.updated_at);
     $('#infoModal').modal('show');
+
     console.log('ok');
 }
 
@@ -385,7 +386,7 @@ function addAmount(id){
     }).then((result) => {
         if (result.value) {
             console.log("Result: " + result.value);
-            $.post("/manage-materials/add-amount", data = {
+            $.post("/manage-teaching-materials/add-amount", data = {
                         _token: '{{ csrf_token() }}',
                         id: id,
                         amount: result.value,
@@ -415,6 +416,7 @@ $('#ready_to_use, #defective').on('change keyup', function() {
         console.log('amount : '+amount);
     }
 });
+
 
 </script>
 @stop

@@ -24,7 +24,22 @@ class AdminController extends Controller
 
     public function countMatApprove()
     {
-        $count = BorrowMaterial::where('status', 0)->count();
+        $count = BorrowMaterial::with('material')->where('status', 0)
+        ->whereHas('material', function ($query) {
+                $query->where('type_id', 2);
+        })
+        ->count();
+        return $count;
+    }
+
+
+    public function countTeachingMatApprove()
+    {
+        $count = BorrowMaterial::with('material')->where('status', 0)
+            ->whereHas('material', function ($query) {
+                $query->where('type_id', 1);
+            })
+        ->count();
         return $count;
     }
 }

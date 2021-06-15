@@ -36,7 +36,7 @@
                             <i class="fa fa-plus"></i> สร้างรายการเบิกวัสดุ
                         </button> --}}
                     </div>
-                    <h3>รายการวัสดุ</h3>
+                    <h3>รายการวัสดุฝึกสอน</h3>
                 </div>
 
                 <div class="ibox-content">
@@ -44,8 +44,9 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>ชื่อวัสดุ</th>
+                                <th>ชื่อวัสดุฝึกสอน</th>
                                 <th>ร้านค้า</th>
+                                {{-- <th>ประเภทวัสดุ</th> --}}
                                 <th>จำนวนคงเหลือ</th>
                                 <th>หน่วยนับ</th>
                                 <th></th>
@@ -70,7 +71,7 @@
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
-          <h5 class="modal-title" id="exampleModalLabel">รายการเบิกวัสดุ</h5>
+          <h5 class="modal-title" id="exampleModalLabel">รายการเบิกวัสดุฝึกสอน</h5>
 
         </div>
         <div class="modal-body">
@@ -152,7 +153,7 @@ $( "#cartBtn" ).click(function() {
 
 $( "#order" ).click(function() {
     if(array_items.length > 0 && array_amounts.length > 0){
-        $.post("/materials/order", data = {
+        $.post("/teaching-materials/order", data = {
             _token: '{{ csrf_token() }}',
             array_items: array_items,
             array_amounts: array_amounts,
@@ -235,6 +236,13 @@ $('.clear-cart').click(function () {
     $('.total-count').text(array_items.length);
 });
 
+function clearCart(){
+     $('.btn-sm').attr("disabled", false);
+    array_items = [];
+    console.log(array_items);
+    $('.total-count').text(array_items.length);
+}
+
 function findObjectByKey(array, key, value) {
     for (var i = 0; i < array.length; i++) {
         if (array[i][key] === value) {
@@ -244,12 +252,6 @@ function findObjectByKey(array, key, value) {
     return 'f';
 }
 
-function clearCart(){
-     $('.btn-sm').attr("disabled", false);
-    array_items = [];
-    console.log(array_items);
-    $('.total-count').text(array_items.length);
-}
 $("#material_list_table").ready(function () {
 
     material_list_table = $('#material_list_table').DataTable({
@@ -260,7 +262,7 @@ $("#material_list_table").ready(function () {
         [3, "desc"]
     ],
     "ajax": {
-        "url": "/materials/show-materials",
+        "url": "/teaching-materials/show-materials",
         "method": "POST",
         "data": {
             "_token": "{{ csrf_token()}}",
@@ -268,7 +270,7 @@ $("#material_list_table").ready(function () {
     },
     'columnDefs': [
         {
-            "targets": [0, 1, 2, 3, 4, 5],
+            "targets": [0, 1, 2, 3, 4],
             "className": "",
         },
     ],

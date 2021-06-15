@@ -11,22 +11,22 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\BorrowMaterial;
-use App\Shop;
 use Carbon\Carbon;
+use App\Shop;
 
-class MaterialAdminController extends Controller
+class TeachingMaterialAdminController extends Controller
 {
 
     public function index(){
         $types = Type::all();
         $units = Unit::all();
         $shops = Shop::all();
-        return view('admin.materials.index', compact('types','units' ,'shops'));
+        return view('admin.teaching-materials.index', compact('types','units','shops'));
     }
 
     public function showMaterials(){
         return datatables()->of(
-            Material::query()->with('unit', 'type' ,'shop')->where('type_id', 2)->orderBy('updated_at', 'desc')
+            Material::query()->with('unit', 'type')->where('type_id', 1)->orderBy('updated_at', 'desc')
         )->toJson();
     }
 
@@ -45,17 +45,17 @@ class MaterialAdminController extends Controller
         $material->price_unit = $req->price_unit;
         $material->amount = $req->amount;
         // $material->total_price = $req->total_price;
-        $material->shop_id = $req->shop;
 
         $material->ready_to_use = $req->ready_to_use;
         $material->defective = $req->defective;
 
+        $material->shop_id = $req->shop;
         $material->unit_id = $req->unit;
-        $material->type_id = 2;
+        $material->type_id = 1;
         $material->save();
 
         DB::commit();
-        return redirect( route('manage-materials.index') )->with('success', 'บันทึกข้อมูลสำเร็จ!');
+        return redirect(route('manage-teaching-materials.index'))->with('success', 'บันทึกข้อมูลสำเร็จ!');
     }
 
     public function deleteMaterial(Request $req){
@@ -97,8 +97,6 @@ class MaterialAdminController extends Controller
         DB::beginTransaction();
         $material = Material::find($req->id);
         $material->amount += $req->amount;
-        $material->ready_to_use += $req->amount;
-
 
         $receiptMaterial = new ReceiptMaterial;
         $receiptMaterial->material_id =  $req->id;
@@ -123,7 +121,7 @@ class MaterialAdminController extends Controller
     }
 
     public function history(){
-        return view('admin.materials.history');
+        return view('admin.teaching-materials.history');
     }
 
     public function showHistory(){
@@ -131,7 +129,7 @@ class MaterialAdminController extends Controller
         return datatables()->of(
             BorrowMaterial::query()->with('material.type','material.unit', 'user')
             ->whereHas('material', function ($query) {
-                $query->where('type_id', 2);
+                $query->where('type_id', 1);
             })
             ->orderBy('updated_at', 'desc')
         )->toJson();
@@ -139,7 +137,7 @@ class MaterialAdminController extends Controller
     }
 
     public function approve(){
-        return view('admin.materials.approve');
+        return view('admin.teaching-materials.approve');
     }
 
     public function approveBorrow(Request $req){

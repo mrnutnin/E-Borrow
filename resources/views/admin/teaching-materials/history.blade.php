@@ -25,7 +25,7 @@
                     <div class="pull-right">
 
                     </div>
-                    <h3>ประวัติการเบิก - คืน วัสดุสำนักงาน</h3>
+                    <h3>ประวัติการเบิก - คืน วัสดุฝึกสอน</h3>
                 </div>
 
                 <div class="ibox-content">
@@ -94,7 +94,7 @@ $("#history_list_table").ready(function () {
         [0, "desc"]
     ],
     "ajax": {
-        "url": "/manage-materials/show-histories",
+        "url": "/manage-teaching-materials/show-histories",
         "method": "POST",
         "data": {
             "_token": "{{ csrf_token()}}",

@@ -19,7 +19,7 @@
 
                         </div>
                         <div class="col-md-4">
-                            <form action=" {{ route('reports.mats.show2') }}" method="GET" id="matExport2"  form="matExport2">
+                            <form action=" {{ route('reports.teaching-mats.show2') }}" method="GET" id="matExport2"  form="matExport2">
 
                                 <br>
                                 <label for="">ประจำปีงบประมาณ : </label>
@@ -75,7 +75,7 @@
 
                         </div>
                         <div class="col-md-4">
-                        <form action=" {{ route('reports.mats.show') }}" method="GET" id="matExport"  form="matExport">
+                        <form action=" {{ route('reports.teaching-mats.show') }}" method="GET" id="matExport"  form="matExport">
                             <br>
                             <label for="">ประจำปีงบประมาณ : </label>
                             <input type="number" id="year" name="year" form="matExport" class="form-control" required>

@@ -60,18 +60,34 @@
                 </ul>
             </li> --}}
 
-
+            {{-- @if(Auth::user()->type != 'Students' || Auth::user()->is_admin == 1) --}}
             <li class="{{ route::is('materials.*') ? 'active' : '' }}">
-                <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">-- วัสดุ --</span> <span class="fa arrow"></span></a>
+                <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">-- วัสดุสำนักงาน --</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li class="{{ route::is('materials.index') ? 'active' : '' }}">
-                        <a href="{{ route('materials.index') }}">เบิกวัสดุ</a>
+                        <a href="{{ route('materials.index') }}">เบิกวัสดุสำนักงาน</a>
                     </li>
                     <li class="{{ route::is('materials.history') ? 'active' : '' }}">
-                        <a href="{{ route('materials.history') }}">ประวัติการ เบิก-คืน วัสดุ</a>
+                        <a href="{{ route('materials.history') }}">ประวัติการ เบิก-คืน วัสดุสำนักงาน</a>
                     </li>
                 </ul>
             </li>
+            {{-- @endif --}}
+
+            {{-- @if(Auth::user()->type == 'Students' || Auth::user()->is_admin == 1) --}}
+            <li class="{{ route::is('teaching-materials.*') ? 'active' : '' }}">
+                <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">-- วัสดุฝึกสอน --</span> <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li class="{{ route::is('teaching-materials.index') ? 'active' : '' }}">
+                        <a href="{{ route('teaching-materials.index') }}">เบิกวัสดุฝึกสอน </a>
+                    </li>
+                    <li class="{{ route::is('teaching-materials.history') ? 'active' : '' }}">
+                        <a href="{{ route('teaching-materials.history') }}">ประวัติการ เบิก-คืน วัสดุฝึกสอน </a>
+                    </li>
+                </ul>
+            </li>
+            {{-- @endif --}}
+
             @if(Auth::user()->type !== 'Students' || Auth::user()->is_admin == 1)
             <li class="{{ route::is('goods.*') ? 'active' : '' }}">
                 <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">-- ครุภัณฑ์ --</span> <span class="fa arrow"></span></a>

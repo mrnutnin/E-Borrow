@@ -9,20 +9,21 @@ use Illuminate\Support\Facades\Auth;
 use App\Material;
 use App\BorrowMaterial;
 
-class MaterialUserController extends Controller
+class TeachingMaterialUserController extends Controller
 {
     //
     public function index()
     {
-        return view('user.materials.index');
+        return view('user.teaching-materials.index');
     }
 
     public function showMaterials()
     {
 
         return datatables()->of(
-            Material::query()->with('unit', 'type', 'shop')->where('type_id', 2)->orderBy('updated_at', 'desc')
+            Material::query()->with('unit', 'type', 'shop')->where('type_id', 1)->orderBy('updated_at', 'desc')
         )->toJson();
+
     }
 
     public function orderMaterial(Request $req)
@@ -67,7 +68,7 @@ class MaterialUserController extends Controller
 
     public function history()
     {
-        return view('user.materials.history');
+        return view('user.teaching-materials.history');
     }
 
     public function showHistory()
@@ -78,7 +79,7 @@ class MaterialUserController extends Controller
         return datatables()->of(
             BorrowMaterial::query()->with('material.type', 'material.unit', 'material.shop')
             ->whereHas('material', function ($query) {
-                $query->where('type_id', 2);
+                $query->where('type_id', 1);
             })
             ->where('user_id', $user->id)->orderBy('id', 'asc')
         )->toJson();

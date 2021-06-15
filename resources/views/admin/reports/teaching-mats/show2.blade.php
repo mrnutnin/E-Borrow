@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -48,7 +49,7 @@
                 <br>
                 <br>
                 <br>
-                <form action="{{ route('reports.mats.export')}}" method="POST">
+                <form action="{{ route('reports.teaching-mats.export2')}}" method="POST">
                     @csrf
                     <input type="hidden" name="bigData" value="{{ json_encode($bigData) }}">
                     <button type="submit" class="btn btn-success"><i class="fa fa-download" aria-hidden="true"></i> Export Excel </button>
@@ -56,80 +57,71 @@
 
             </div>
             <span class="pull-right">
-                <a href=" {{ route('reports.mats.index')}}" class="btn btn-info" > ย้อนกลับ </a>
+                <a href=" {{ route('reports.teaching-mats.index')}}" class="btn btn-info" > ย้อนกลับ </a>
             </span>
             <br><br><br>
-
             <table class="display nowrap" style="width:100%" id="simple_table">
                 <thead>
                     <tr style="text-algin:center; ">
-                        <th style="border: none;" colspan="13"> {{ $bigData['thead']['text']}}  </th>
+                        <th style="border: none;" colspan="13">รายการวัสดุ ประจำปีงบประมาณ  {{$bigData['thead']['year'] }}</th>
                     </tr>
                     <tr style="text-algin:center;">
-                        <th style="border: none;" colspan="13">สาขาวิชาวิศวกรรมคอมพิวเตอร์ คณะวิศวกรรมศาสตร์ มหาวิทยาลัยเทคโนโลยีราชมงตลอีสาน วิทยาเขตขอนแก่น</th>
+                        <th style="border: none;" colspan="13">สาขาวิชาวิศวกรรมคอมพิวเตอร์ มหาวิทยาลัยเทคโนโลยีราชมงตลอีสาน วิทยาเขตขอนแก่น</th>
                     </tr>
-                    {{-- @if($bigData['thead']['text'] != '')
+                    @if($bigData['thead']['text'] != '')
                     <tr style="text-algin:center;">
                         <th style="border: none;" colspan="13">{{$bigData['thead']['text'] }}</th>
                     </tr>
-                    @endif --}}
+                    @endif
                     <tr style="text-algin:center;">
                         <th rowspan="2">ที่</th>
-                        <th rowspan="2">รายการวัสดุ</th>
-                        <th rowspan="2">หน่วย</th>
+                        {{-- <th rowspan="2">หน่วยงาน</th> --}}
+                        {{-- <th rowspan="2">วันที่ซื้อ</th> --}}
+                        <th rowspan="2">รหัสวัสดุ</th>
+                        <th rowspan="2">รายการ</th>
+                        <th rowspan="2">จำนวน</th>
+                        <th rowspan="2">หน่วยนับ</th>
                         <th rowspan="2">ราคาต่อหน่วย</th>
-                        <th colspan="2">คงเหลือยกมา</th>
-                        <th colspan="2">รับ</th>
-                        <th colspan="2">จ่าย</th>
-                        <th colspan="2">คงเหลือ</th>
+                        <th rowspan="2">ราคารวม</th>
+                        <th colspan="2">สภาพ</th>
+                        <th rowspan="2">สถานที่เก็บ</th>
                         <th rowspan="2">หมายเหตุ</th>
-
                     </tr>
-                    <tr style="text-algin:center;">
-                        <th>จำนวน</th>
-                        <th>จำนวนเงิน</th>
-                        <th>จำนวน</th>
-                        <th>จำนวนเงิน</th>
-                        <th>จำนวน</th>
-                        <th>จำนวนเงิน</th>
-                        <th>จำนวน</th>
-                        <th>จำนวนเงิน</th>
+                    <tr>
+                        <th>ปกติ</th>
+                        <th>ชำรุด</th>
 
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($bigData['tbodies'] as $row)
                     <tr>
-                        <td style="text-align: center;"> {{ $bigData['thead']['i'] ++ }}</td>
-                        <td> {{ $row['mat']['name'] }} </td>
-                        <td style="text-align: center;"> {{ $row['mat']['unit']['name'] }} </td>
-                        <td style="text-align: right;"> {{ $row['mat']['price_unit'] }} </td>
-                        <td style="text-align: right;"> {{ $row['remain'] }} </td>
-                        <td style="text-align: right;"> {{ number_format($row['remain'] * $row['mat']['price_unit'], 2) }} </td>
-                        <td style="text-align: right;"> {{ $row['receive'] }} </td>
-                        <td style="text-align: right;"> {{ number_format($row['receive'] * $row['mat']['price_unit'], 2) }} </td>
-                        <td style="text-align: right;"> {{ $row['spent'] }} </td>
-                        <td style="text-align: right;"> {{ number_format($row['spent'] * $row['mat']['price_unit'], 2) }} </td>
-                        <td style="text-align: right;"> {{ $row['balance'] }} </td>
-                        <td style="text-align: right;"> {{ number_format($row['balance'] * $row['mat']['price_unit'], 2) }}  </td>
-                        @if($row['mat']['amount'] == 0 )
-                        <td> หมดสต๊อก </td>
-                        @else
+                        <td> {{ $bigData['thead']['i'] ++ }} </td>
+                        {{-- <td> {{ $row['department']['name'] }} </td> --}}
+                        {{-- <td style="text-align: center;"> {{ date("d/m/Y", strtotime($row['buy_date']))}} </td> --}}
+                        <td> {{ $row['bill_no'] }} </td>
+                        <td> {{ $row['name'] }} </td>
+                        <td style="text-align: center;"> {{ $row['amount'] }} </td>
+                        <td style="text-align: center;"> {{ $row['unit']['name'] }} </td>
+                        <td style="text-align: right;"> {{ number_format($row['price_unit'], 2) }} </td>
+                        <td style="text-align: right;"> {{ number_format($row['price_unit'] *  $row['amount'], 2) }} </td>
+                        <td style="text-align: center;"> {{ $row['ready_to_use'] }}</td>
+                        <td style="text-align: center;"> {{ $row['defective'] }}</td>
                         <td> </td>
-                        @endif
+                        <td> </td>
                     </tr>
                     @endforeach
                 </tbody>
                 <tfoot>
-                    {{-- <tr>
-                        <th colspan="7"></th>
+                    <tr>
+                        <th colspan="5"></th>
                         <th>รวม</th>
-                        <th style="text-align: right;"> </th>
+                        <th style="text-align: right;"> {{ number_format($bigData['tfoot']['total'], 2) }}</th>
                         <th></th>
                         <th></th>
                         <th></th>
                         <th></th>
-                    </tr> --}}
+                    </tr>
                 </tfoot>
             </table>
 

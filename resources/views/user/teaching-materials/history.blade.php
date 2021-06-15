@@ -1,5 +1,5 @@
 
-@extends('layouts.admin.app')
+@extends('layouts.home.app')
 
 @section('title', 'Main page')
 
@@ -25,11 +25,11 @@
                     <div class="pull-right">
 
                     </div>
-                    <h3>ประวัติการเบิก - คืน วัสดุสำนักงาน</h3>
+                    <h3>ประวัติการเบิก - คืน วัสดุ ฝึกสอน</h3>
                 </div>
 
                 <div class="ibox-content">
-                    <table class="table table-bordered" id="history_list_table" style="width:100%; " >
+                    <table class="table table-bordered" id="history_list_table" style="width:100%" >
                         <thead>
                             <tr>
 
@@ -39,7 +39,6 @@
                                 <th>จำนวน</th>
                                 <th>หน่วย</th>
                                 {{-- <th>ประเภท</th> --}}
-                                <th>ชื่อผู้ยืม</th>
                                 {{-- <th>action</th> --}}
                                 <th>สถานะ</th>
                                 <th>หมายเหตุ</th>
@@ -79,22 +78,21 @@
 @endsection
 
 @section('script')
-{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs9/sweetalert/2.1.2/sweetalert.min.js" ></script> --}}
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" ></script> --}}
 
 <script>
- var history_list_table = '';
+
 $("#history_list_table").ready(function () {
 
-     history_list_table = $('#history_list_table').DataTable({
+    var history_list_table = $('#history_list_table').DataTable({
     "searching": true,
     "responsive": true,
-    "lengthMenu": [ 10, 25, 50, 75, 100 ],
     "pageLength": 10,
     "order": [
         [0, "desc"]
     ],
     "ajax": {
-        "url": "/manage-materials/show-histories",
+        "url": "/teaching-materials/show-histories",
         "method": "POST",
         "data": {
             "_token": "{{ csrf_token()}}",
@@ -102,11 +100,12 @@ $("#history_list_table").ready(function () {
     },
     'columnDefs': [
         {
-            "targets": [6,7],
-            "className": "text-center",
+            "targets": [0, 1, 2, 3, 4, 5, 6],
+            "className": "",
         },
     ],
-    "columns": [{
+    "columns": [
+        {
             "data": "id",
         },
         {
@@ -124,14 +123,9 @@ $("#history_list_table").ready(function () {
         {
             "data": "unit",
         },
-        // {
-        //     "data": "type",
-        // },
+
         {
-            "data": "user_name",
-        },
-        {
-        "render": function (data, type, full) {
+            "render": function (data, type, full) {
             var text = '';
                 if(full.status == 0){
                     text = '<span class="badge badge-warning">รอดำเนินการ</span>';
@@ -142,8 +136,10 @@ $("#history_list_table").ready(function () {
                 }else if (full.status == 3){
                     text = '<span class="badge badge-primary">คืนแล้ว</span>';
                 }
-                if(full.type == 'สิ้นเปลือง' && full.status == 1){
-                    text = '<span class="badge badge-success">ไม่ต้องคืน</span>';
+                if(full.material){
+                    if(full.material.type.id == 2 && full.status == 1){
+                        text = '<span class="badge badge-success">ไม่ต้องคืน</span>';
+                    }
                 }
                 return  text;
             }
@@ -160,8 +156,10 @@ $("#history_list_table").ready(function () {
                 if(full.status == 1){
                     text = `<span class="badge badge-warning">${moment(full.approve_date).format('D/M/YYYY')}</span>`;
                 }
-                if(full.type == 'สิ้นเปลือง' && full.status == 1){
-                    text = `<span class="badge badge-success">${moment(full.approve_date).format('D/M/YYYY')}</span>`;
+                if(full.material){
+                    if(full.material.type.id == 2 && full.status == 1){
+                        text = `<span class="badge badge-success">${moment(full.approve_date).format('D/M/YYYY')}</span>`;
+                     }
                 }
 
                 return  text;
