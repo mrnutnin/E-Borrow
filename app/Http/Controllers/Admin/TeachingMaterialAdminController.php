@@ -45,6 +45,7 @@ class TeachingMaterialAdminController extends Controller
         $material->price_unit = $req->price_unit;
         $material->amount = $req->amount;
         // $material->total_price = $req->total_price;
+        $material->place = $req->place;
 
         $material->ready_to_use = $req->ready_to_use;
         $material->defective = $req->defective;

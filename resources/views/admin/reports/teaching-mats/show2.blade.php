@@ -107,7 +107,7 @@
                         <td style="text-align: right;"> {{ number_format($row['price_unit'] *  $row['amount'], 2) }} </td>
                         <td style="text-align: center;"> {{ $row['ready_to_use'] }}</td>
                         <td style="text-align: center;"> {{ $row['defective'] }}</td>
-                        <td> </td>
+                        <td> {{ $row['place'] }}</td>
                         <td> </td>
                     </tr>
                     @endforeach

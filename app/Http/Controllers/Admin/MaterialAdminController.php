@@ -46,6 +46,7 @@ class MaterialAdminController extends Controller
         $material->amount = $req->amount;
         // $material->total_price = $req->total_price;
         $material->shop_id = $req->shop;
+        $material->place = $req->place;
 
         $material->ready_to_use = $req->ready_to_use;
         $material->defective = $req->defective;

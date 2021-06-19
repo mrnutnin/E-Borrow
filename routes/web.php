@@ -24,7 +24,10 @@ Auth::routes();
 
 Route::get('/loginSSO', 'Auth\LoginSSOController@loginSSO')->name('loginSSO');
 Route::get('/login-sso', 'Auth\LoginSSOController@getLogin');
-Route::get('/logout-sso', 'Auth\LoginSSOController@getLogout');
+
+
+Route::get('/logoutSSO', 'Auth\LogoutSSOController@logoutSSO')->name('logoutSSO');
+Route::get('/logout-sso', 'Auth\LogoutSSOController@getLogout');
 //Route for normal user
 Route::group(['middleware' => ['user']], function () {
     // Route::get('/home', 'HomeController@index');

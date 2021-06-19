@@ -44,9 +44,8 @@
             <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
         </div>
         <ul class="nav navbar-top-links navbar-right">
-
+            @if(Auth::user()->is_sso != 1)
             <li>
-                {{-- <a href="https://service.eng.rmuti.ac.th/eng-logout/login/get/"> logout sso </a> --}}
                 <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     <i class="fa fa-sign-out"></i> Log out
                 </a>
@@ -54,6 +53,13 @@
                     @csrf
                 </form>
             </li>
+            @else
+            <li>
+                <a href="{{ route('logoutSSO') }}" >
+                    <i class="fa fa-sign-out"></i> Log out SSO
+                </a>
+            </li>
+            @endif
         </ul>
 
     </nav>

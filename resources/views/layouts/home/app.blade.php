@@ -101,9 +101,10 @@
 
 @section('script')
 
+<script>
 
-
-
+</script>
+{{-- https://service.eng.rmuti.ac.th/eng-login/logout/?id=10&secret=SAWASDEE&fbclid=IwAR30BH5y3HBdNbo3VKq4ECU8RJp38Zmx7DpT9fUpdEWRauSzsCPbrmsmCHo --}}
 @show
 
 </body>

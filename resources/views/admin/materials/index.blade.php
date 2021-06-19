@@ -162,6 +162,13 @@
                                 </div>
                             </div>
 
+                            <div class="col-md-6">
+                                <label>สถานที่เก็บ/ใช้งาน</label>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="place" name="place" placeholder="เช่น คณะวิศวกรรมศาสตร์">
+                                </div>
+                            </div>
+
                             {{-- <div class="col-md-6">
                                 <label><span style="color:red">*</span>ประเภทวัสดุ</label>
                                 <div class="form-group">
@@ -348,6 +355,7 @@ function editMaterial(material) {
     var total_price = $('#total_price').val(material.amount * material.price_unit);
     // var type = $('#type').val(material.type.id);
     var shop = $('#shop').val(material.shop_id);
+    var place = $('#place').val(material.place);
 
     var ready_to_use = $('#ready_to_use').val(material.ready_to_use);
     var defective = $('#defective').val(material.defective);
