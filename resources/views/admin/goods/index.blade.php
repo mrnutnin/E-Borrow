@@ -368,13 +368,17 @@ function editGood(good) {
     var price_unit = $('#price_unit').val(good.price_unit);
     var amount = $('#amount').val(good.amount);
     var unit = $('#unit').val(good.unit.id);
-    var total_price = $('#total_price').val(good.total_price);
+    var total_price = $('#total_price').val(good.price_unit * good.amount);
     var place = $('#place').val(good.place);
     var status = $('#status').val(good.status);
 
 
     var ready_to_use = $('#ready_to_use').val(good.ready_to_use);
     var defective = $('#defective').val(good.defective);
+
+    console.log('ready_to_use : ' + good.ready_to_use)
+    console.log('price_unit : ' + good.price_unit)
+       console.log(good.ready_to_use * good.price_unit)
 
     $('#addItemModal').modal('show');
     console.log('ok');
@@ -435,17 +439,16 @@ Swal.fire({
 $('#ready_to_use, #defective').on('change keyup', function() {
     var ready_to_use = $("#ready_to_use").val();
     var defective = $("#defective").val();
-    console.log(ready_to_use);
-    console.log(defective);
+    // console.log(ready_to_use);
+    // console.log(defective);
     if(ready_to_use && defective){
         var amount = parseInt(ready_to_use) + parseInt(defective);
-
         $("#amount").val(amount);
-        console.log('amount : '+amount);
+        // console.log('amount : '+amount);
     }
     if(ready_to_use == undefined || defective == undefined || ready_to_use == '' || defective == ''){
-        $("#amount").val('');
-        console.log('amount : '+amount);
+        $("#amount").val(0);
+        // console.log('amount : '+amount);
     }
 });
 

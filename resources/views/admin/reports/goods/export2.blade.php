@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+{{-- <html lang="th"> --}}
 <head>
+    {{-- <meta http-equiv=”Content-Language” content=”th” /> --}}
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta charset="utf-8">
+    {{-- <meta charset="utf-8"> --}}
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -11,22 +12,51 @@
 
     <title>exeport-excel</title>
     <style>
+          @font-face {
+                font-family: 'THSarabunNew';
+                font-style: normal;
+                font-weight: normal;
+                src: url("{{ public_path('fonts/THSarabunNew.ttf') }}") format('truetype');
+            }
+            @font-face {
+                font-family: 'THSarabunNew';
+                font-style: normal;
+                font-weight: bold;
+                src: url("{{ public_path('fonts/THSarabunNew Bold.ttf') }}") format('truetype');
+            }
+            @font-face {
+                font-family: 'THSarabunNew';
+                font-style: italic;
+                font-weight: normal;
+                src: url("{{ public_path('fonts/THSarabunNew Italic.ttf') }}") format('truetype');
+            }
+            @font-face {
+                font-family: 'THSarabunNew';
+                font-style: italic;
+                font-weight: bold;
+                src: url("{{ public_path('fonts/THSarabunNew BoldItalic.ttf') }}") format('truetype');
+            }
+
+        body {
+            font-family: "THSarabunNew";
+        }
         table {
             border-collapse: collapse;
             width: 100%;
+
         }
 
 
         th {
             border: 1px solid #dddddd;
-            padding: 8px;
+            padding: 3px;
             text-align: center;
             vertical-align: middle;
         }
 
         td {
             border: 1px solid #dddddd;
-            padding: 8px;
+            padding: 3px;
         }
 
 
@@ -35,6 +65,11 @@
         .center {
             text-align: center;
         }
+
+
+
+
+
     </style>
 </head>
 
