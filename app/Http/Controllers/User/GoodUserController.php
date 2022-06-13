@@ -26,6 +26,7 @@ class GoodUserController extends Controller
 
     public function orderGood(Request $req)
     {
+        // return $req->all();
         $user = Auth::user();
         $items = $req->array_items;
         $amounts = $req->array_amounts;
@@ -43,7 +44,7 @@ class GoodUserController extends Controller
             $borrow->amount = $amounts[$i];
             $borrow->name = $good->name;
             $borrow->good_no = $good->good_no;
-            $borrow->unit = $good->unit;
+            $borrow->unit = $good->unit->name;
             $borrow->user_name = $user->name;
             $borrow->action = 1;
             $borrow->save();

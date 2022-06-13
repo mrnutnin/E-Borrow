@@ -75,14 +75,14 @@
 
                         </div>
                         <div class="col-md-4">
-                        <form action=" {{ route('reports.goods.show2') }}" method="GET" id="matExport"  form="matExport">
+                        <form action=" {{ route('reports.goods.show2') }}" method="GET" id="goodExport2"  form="goodExport2">
                             <br>
                             <label for="">ประจำปีงบประมาณ : </label>
-                            <input type="number" id="year" name="year" form="matExport" class="form-control" required>
+                            <input type="number" id="year" name="year" form="goodExport2" class="form-control" required>
                             <br>
 
                             <label for="">รูปแบบรายการ : </label>
-                              <select name="select" id="select" form="goodExport" class="form-control" required>
+                              <select name="select" id="select" form="goodExport2" class="form-control" required>
                                    <option value="1">ทั้งหมด</option>
                                    <option value="2">มูลค่าต่ำกว่า 5,000 บาท</option>
                                    <option value="3">มูลค่ามากกว่า 5,000 บาท</option>
@@ -102,11 +102,11 @@
                         </div>
                         <div class="col-md-4">
                             <div class="pull-right">
-                            <button style="background-color: #4CAF50; color: white; margin-right:3px;" form="matExport" name="type" value="excel" type="submit" class="btn btn">
+                            <button style="background-color: #4CAF50; color: white; margin-right:3px;" form="goodExport2" name="type" value="excel" type="submit" class="btn btn">
                             <i class="fa fa-file-excel-o"></i> ShowExcel
                             </button>
 
-                            <button style="background-color: #1c84c6; color: white; margin-right:3px;" form="matExport"  name="type" value="pdf" type="submit" class="btn btn">
+                            <button style="background-color: #1c84c6; color: white; margin-right:3px;" form="goodExport2"  name="type" value="pdf" type="submit" class="btn btn">
                                 <i class="fa fa-file-pdf-o"></i> ShowPDF
                                 </button>
                             </div>

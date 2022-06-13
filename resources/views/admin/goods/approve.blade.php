@@ -196,7 +196,7 @@ function updateStatus(id,status){
 
                 }).then((result) => {
                     if (result.value) {
-                        $.post("/manage-materials/approve-borrow", data = {
+                        $.post("/manage-goods/approve-borrow", data = {
                                 _token: '{{ csrf_token() }}',
                                 id: id,
                                 status: status,

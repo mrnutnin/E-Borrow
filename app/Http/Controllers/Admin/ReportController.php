@@ -15,6 +15,7 @@ use App\Material;
 use App\Type;
 use App\ReceiptMaterial;
 use App\BorrowMaterial;
+use App\Exports\GoodsExport2;
 use Maatwebsite\Excel\Facades\Excel;
 use PDF;
 
@@ -48,6 +49,7 @@ class ReportController extends Controller
 
     public function showGoodReport(Request $req){
 
+
         $year = $req->year;
         $select = $req->select;
 
@@ -66,7 +68,7 @@ class ReportController extends Controller
                 ->orderBy('updated_at', 'desc')
                 ->get();
 
-            $sum = Good::select(DB::raw('sum(amount * price_unit) as total'))->where('price_unit' , '<=', 5000)->first();
+            $sum = Good::select(DB::raw('sum(amount * price_unit) as total'))->where('price_unit' , '<', 5000)->first();
 
             $text = 'รายการครุภัณฑ์ที่มีมูลค่าต่ำกว่า 5,000 บาท';
 
@@ -76,7 +78,7 @@ class ReportController extends Controller
                 ->orderBy('updated_at', 'desc')
                 ->get();
 
-            $sum = Good::select(DB::raw('sum(amount * price_unit) as total'))->where('price_unit' , '<=', 5000)->first();
+            $sum = Good::select(DB::raw('sum(amount * price_unit) as total'))->where('price_unit' , '>=', 5000)->first();
 
             $text = 'รายการครุภัณฑ์ที่มีมูลค่ามากกว่า 5,000 บาท';
         }
@@ -105,6 +107,7 @@ class ReportController extends Controller
     }
 
     public function exportGoodExcel(Request $req){
+
         $bigData = json_decode($req->bigData, true);
 
         return Excel::download(new GoodsExport($bigData), 'ExportExcel.xlsx');
@@ -112,6 +115,7 @@ class ReportController extends Controller
 
     public function showGoodReport2(Request $req)
     {
+
         $year = $req->year;
         $select = $req->select;
 
@@ -132,7 +136,7 @@ class ReportController extends Controller
             ->orderBy('updated_at', 'desc')
                 ->get();
 
-            $sum = Good::select(DB::raw('sum(amount * price_unit) as total'))->where('price_unit', '<=', 5000)->first();
+            $sum = Good::select(DB::raw('sum(amount * price_unit) as total'))->where('price_unit', '<', 5000)->first();
 
             $text1 = 'รายการครุภัณฑ์ที่มีมูลค่าต่ำกว่า 5,000 บาท';
         } else {
@@ -141,7 +145,7 @@ class ReportController extends Controller
             ->orderBy('updated_at', 'desc')
                 ->get();
 
-            $sum = Good::select(DB::raw('sum(amount * price_unit) as total'))->where('price_unit', '<=', 5000)->first();
+            $sum = Good::select(DB::raw('sum(amount * price_unit) as total'))->where('price_unit', '>=', 5000)->first();
 
             $text1 = 'รายการครุภัณฑ์ที่มีมูลค่ามากกว่า 5,000 บาท';
         }
